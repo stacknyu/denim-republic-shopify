@@ -1,0 +1,83 @@
+<div class=' twcss-px-10 twcss-w-full  md:twcss-px-0 twcss-pt-8 md:twcss-pt-16 '>
+  <div class='twcss-grid md:twcss-grid-cols-2  twcss-max-md:grid-cols-1  '>
+    {% for block in section.blocks %}
+      <div
+        class='twcss-relative twcss-overflow-hidden twcss-aspect-w-16 twcss-aspect-h-9'
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.category_image != blank %}
+          {{
+            block.settings.category_image
+            | image_url: width: 800
+            | image_tag:
+              class: 'twcss-w-full max-md:twcss-aspect-square md:twcss-h-[500px] twcss-background-cover  twcss-object-cover',
+              loading: 'lazy',
+              alt: block.settings.category_name
+          }}
+        {% else %}
+          <div class='twcss-w-full twcss-h-full twcss-bg-gray-200'></div>
+        {% endif %}
+        <div class='twcss-absolute twcss-inset-0 twcss-flex twcss-flex-col twcss-items-center twcss-justify-center twcss-bg-black twcss-bg-opacity-30'>
+          <h2 class='twcss-text-white twcss-text-5xl  md:twcss-text-7xl lg:twcss-text-9xl twcss-font-bold twcss-mb-16 md:twcss-mb-32'>
+            {{ block.settings.category_name }}
+          </h2>
+          <a
+            href='{{ block.settings.category_link }}'
+            class='twcss-bg-black twcss-text-white twcss-px-6 twcss-py-2 md:twcss-px-8  hover:twcss-bg-red-600 hover:twcss-text-white md:twcss-py-4 twcss-transition-all twcss-duration-300  twcss-text-2xl md:twcss-text-2xl twcss-uppercase twcss-font-bold'
+            >shop now</a
+          >
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Categories",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "SHOP MEN"
+        },
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category Image"
+        },
+        {
+          "type": "url",
+          "id": "category_link",
+          "label": "Category Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Categories",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

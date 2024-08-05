@@ -1,0 +1,102 @@
+{% liquid
+  assign header_font = settings.type_header_font
+  assign header_font_bolder = header_font | font_modify: 'weight', 'bolder'
+  assign header_font_lighter = header_font | font_modify: 'weight', '-100'
+  assign base_font = settings.type_base_font
+  assign base_font_bolder = base_font | font_modify: 'weight', 'bolder'
+  assign base_font_bold = base_font | font_modify: 'weight', 'bold'
+  assign base_font_italic = base_font | font_modify: 'style', 'italic'
+  assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic'
+  assign use_custom_font_heading = settings.use_custom_font_heading
+  assign use_custom_font_body = settings.use_custom_font_body
+  assign custom_heading_font = settings.custom_heading_font
+  assign custom_body_font = settings.custom_body_font
+%}
+
+<style>
+    {% if use_custom_font_heading == true and custom_heading_font != blank %}
+        {% assign heading_fonts = custom_heading_font | newline_to_br | split: '<br />' %}
+        {% for link in heading_fonts %}
+          {% liquid
+            assign link_data = link | split: '@'
+            assign font_url = link_data | first | strip_newlines
+            assign weight = link_data | last
+          %}
+          @font-face {
+            font-family: 'Custom-Heading-Font';
+            font-weight: {{ weight }};
+            src: url('{{ font_url }}');
+            font-display: swap;
+          }
+        {% endfor %}
+      {% endif %}
+
+  {% comment %} {% if use_custom_font_heading == true and custom_heading_font != blank %}
+    {% assign heading_fonts = custom_heading_font | newline_to_br | split: '<br />' %}
+    {% for link in heading_fonts %}
+      {% liquid
+        assign link_data = link | split: '@'
+        assign font_url = link_data | first | strip_newlines
+        assign weight = link_data | last
+      %}
+      @font-face {
+        font-family: 'Custom-Heading-Font';
+        font-weight: {{ weight }};
+        src: url({{ font_url }});
+        font-display: swap;
+      }
+    {% endfor %}
+    :root {
+      --font-heading-family: 'Custom-Heading-Font';
+      --font-heading-style: normal;
+      --font-heading-weight: {{ settings.custom_heading_weight }};
+    }
+  {% else %}
+    {{ header_font | font_face: font_display: 'swap' }}
+    {{ header_font_bolder | font_face: font_display: 'swap' }}
+    {{ header_font_lighter | font_face: font_display: 'swap' }}
+    :root {
+      --font-heading-family: {{ header_font.family }}, {{ header_font.fallback_families }};
+      --font-heading-style: {{ header_font.style }};
+      --font-heading-weight: {{ header_font.weight }};
+    }
+  {% endif %} {% endcomment %}
+
+  {% if use_custom_font_body == true and custom_body_font != blank %}
+    {% assign body_fonts = custom_body_font | newline_to_br | split: '<br />' %}
+    {% for link in body_fonts %}
+      {% liquid
+        assign link_data = link | split: '@'
+        assign font_url = link_data | first | strip_newlines
+        assign weight = link_data | last
+      %}
+      @font-face {
+        font-family: 'Custom-Body-Font';
+        font-weight: {{ weight }};
+        src: url({{ font_url }});
+        font-display: swap;
+      }
+    {% endfor %}
+    :root {
+      --font-body-family: 'Custom-Body-Font';
+      --font-body-style: normal;
+      --font-body-weight: {{ settings.custom_body_weight }};
+    }
+  {% else %}
+
+
+
+
+
+    {{ base_font | font_face: font_display: 'swap' }}
+    {{ base_font_bold | font_face: font_display: 'swap' }}
+    {{ base_font_bolder | font_face: font_display: 'swap' }}
+    {{ base_font_italic | font_face: font_display: 'swap' }}
+    {{ base_font_bold_italic | font_face: font_display: 'swap' }}
+    :root {
+      --font-body-family: {{ base_font.family }}, {{ base_font.fallback_families }};
+      --font-body-style: {{ base_font.style }};
+      --font-body-weight: {{ base_font.weight }};
+    }
+  {% endif %}
+</style>

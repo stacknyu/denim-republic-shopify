@@ -1,0 +1,234 @@
+{% schema %}
+{
+  "name": "New Arrivals and Guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "NEW ARRIVALS"
+    },
+    {
+      "type": "image_picker",
+      "id": "guide_image",
+      "label": "Guide Background Image"
+    },
+    {
+      "type": "text",
+      "id": "guide_title",
+      "label": "Guide Title",
+      "default": "OUR FITS"
+    },
+    {
+      "type": "text",
+      "id": "guide_subtitle",
+      "label": "Guide Subtitle",
+      "default": "THE GUIDE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_guide",
+      "name": "Size Guide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Size Guide"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Size Guide Image"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "discover_link",
+          "label": "Discover More Link"
+        },
+        {
+          "type": "collection_list",
+          "id": "collections",
+          "label": "Collections",
+          "limit": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals and Guide",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "size_guide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div
+  x-data="
+    {
+      activeTab: 'all',
+      tabs: [
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' -%}
+            '{{ block.settings.name | downcase }}',
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  "
+  class='twcss-px-10 twcss-h-full twcss-w-full twcss-bg-[#f3f3f3]  md:twcss-px-16 twcss-py-8 md:twcss-py-16'
+>
+  <h2 class='twcss-text-4xl md:twcss-text-5xl  twcss-font-bold twcss-text-center twcss-mb-12'>
+    {{ section.settings.title }}
+  </h2>
+
+  <div class='twcss-flex twcss-h-full  twcss-items-stretch  twcss-flex-col md:twcss-flex-row twcss-gap-8'>
+    <!-- Guide Section -->
+    <div class='twcss-w-full md:twcss-max-w-[31%] twcss-relative'>
+      {{
+        section.settings.guide_image
+        | image_url: width: 800
+        | image_tag: class: 'twcss-w-full twcss-h-full twcss-object-cover', loading: 'lazy', alt: 'Guide'
+      }}
+
+      <div class='twcss-absolute twcss-text-center twcss-gap-2 xl:twcss-gap-8  twcss-py-2 twcss-inset-0 twcss-bg-black twcss-bg-opacity-50 twcss-flex twcss-flex-col twcss-justify-center twcss-items-center twcss-text-white twcss-p-6'>
+        <h3 class=' twcss-text-3xl twcss-tracking-widest  md:twcss-text-5xl  md:twcss-tracking-[0.3em]   xl:twcss-text-6xl xl:twcss-tracking-[0.5em] twcss-text-white twcss-text-center '>
+          {{ section.settings.guide_title }}
+        </h3>
+        <p class='twcss-text-5xl md:twcss-text-9xl xl:twcss-text-[10.5rem] xl:twcss-leading-[9rem]   twcss-font-bold '>
+          {{ section.settings.guide_subtitle }}
+        </p>
+        <div class='twcss-flex twcss-flex-wrap twcss-justify-center twcss-gap-4'>
+          {% for block in section.blocks %}
+            {% if block.type == 'size_guide' %}
+              <div x-cloak x-data='{showSizeGuide: false}'>
+                <div
+                  x-show='showSizeGuide'
+                  x-cloak
+                  class='twcss-fixed twcss-inset-0 twcss-bg-black twcss-px-10 md:twcss-px-0 twcss-bg-opacity-50 twcss-flex twcss-items-center twcss-justify-center twcss-z-50'
+                >
+                  <div class='twcss-bg-white twcss-p-6 twcss-rounded-lg twcss-max-w-3xl twcss-w-full'>
+                    <button
+                      @click='showSizeGuide = false'
+                      class='twcss-float-right twcss-text-black twcss-text-3xl'
+                    >
+                      &times;
+                    </button>
+                    <h3 class='twcss-text-2xl twcss-font-bold twcss-mb-4'>{{ block.settings.name }}</h3>
+
+                    {{
+                      block.settings.image
+                      | image_url: width: 1000
+                      | image_tag: class: 'twcss-w-full ', loading: 'lazy', alt: 'Size Guide'
+                    }}
+                  </div>
+                </div>
+
+                <!-- Size Guide Button -->
+                <button
+                  @click='showSizeGuide = true'
+                  class=' twcss-bg-black twcss-text-3xl twcss-font-semibold        twcss-border-black twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 hover:twcss-text-white twcss-transition-all twcss-duration-300  '
+                >
+                  {{ block.settings.name }}
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Collections Section -->
+    <div class='twcss-w-full twcss-h-full twcss-flex twcss-flex-col   md:twcss-flex-1    '>
+      <!-- Tabs -->
+      <div class='twcss-flex twcss-flex-wrap -twcss-mb-[1px] twcss-z-10 twcss-font-semibold twcss-divide-x '>
+        {% comment %}
+          <button
+            @click="activeTab = 'all'"
+            :class="{ 'twcss-bg-white twcss-text-black twcss-z-10  twcss-border-t   twcss-border-gray-200 ': activeTab === 'all', 'twcss-border-r-0 twcss-border-l-0': activeTab !== 'all'  }"
+            class='twcss-px-10 twcss-text-3xl twcss-py-6  twcss-border-l  twcss-capitalize'
+          >
+            All
+          </button>
+        {% endcomment %}
+        {% for block in section.blocks %}
+          {% if block.type == 'category' %}
+            <button
+              @click="activeTab = '{{ block.settings.name | downcase }}'"
+              :class="{ 'twcss-bg-white twcss-text-balck twcss-border-t  twcss-border-l twcss-border-gray-200': activeTab === '{{ block.settings.name | downcase }}', 'twcss-border-l-0 twcss-border-r-0 ' : activeTab !== '{{ block.settings.name | downcase }}' }"
+              class='twcss-px-10 twcss-text-3xl twcss-py-6   twcss-capitalize'
+            >
+              {{ block.settings.name }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Collections Grid -->
+      <div class='twcss-grid twcss-flex-1 twcss-items-stretch twcss-grid-cols-1 twcss-h-full twcss-z-0 md:twcss-grid-cols-2 twcss-bg-white  twcss-px-12 twcss-py-8 twcss-border-gray-200 twcss-border-collapse twcss-border lg:twcss-grid-cols-3 twcss-gap-6 '>
+        {% for block in section.blocks %}
+          {% if block.type == 'category' %}
+            {% for collection in block.settings.collections %}
+              <div
+                x-show=" activeTab === '{{ block.settings.name | downcase }}'"
+                class='twcss-space-y-4'
+              >
+                {{
+                  collection.image
+                  | image_url: width: 400
+                  | image_tag:
+                    class: 'twcss-w-full twcss-my-auto twcss-aspect-square twcss-object-cover',
+                    loading: 'lazy'
+                }}
+
+                <h4 class='twcss-text-4xl md:text-6xl  twcss-tracking-tight twcss-font-bold'>
+                  {{ collection.title }}
+                </h4>
+                <p class='twcss-text-sm'>{{ collection.description }}</p>
+                <div class='twcss-flex twcss-font-semibold twcss-text-black twcss-space-x-4'>
+                  <a
+                    href='{{ block.settings.discover_link }}'
+                    class='twcss-bg-black twcss-text-white twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 twcss-transition-all twcss-duration-300  '
+                    >discover more</a
+                  >
+                  <a
+                    href='{{ block.settings.shop_link }}'
+                    class='twcss-border twcss-border-black twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 hover:twcss-text-white twcss-transition-all twcss-duration-300 '
+                    >shop now</a
+                  >
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- style -%}
+  [x-cloak] {
+    display: none !important;
+  }
+{%- endstyle -%}

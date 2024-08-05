@@ -12,6 +12,7 @@ module.exports = {
       sm: '320px',
       md: '750px',
       lg: '990px',
+      xl: '1200px',
       xlg: '1440px',
       x2lg: '1920px',
       pageMaxWidth: '1440px',

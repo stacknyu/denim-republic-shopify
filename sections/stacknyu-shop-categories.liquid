@@ -1,0 +1,183 @@
+<div class=' twcss-px-10 twcss-w-full  md:twcss-px-16 twcss-py-8 md:twcss-py-16 '>
+  <h2 class='twcss-text-4xl md:twcss-text-5xl  twcss-font-bold twcss-mb-4'>{{ section.settings.heading }}</h2>
+
+  <div class='twcss-mb-8'>
+    <span class='twcss-mr-4 twcss-font-medium'>Filter by:</span>
+    <div class='twcss-inline-flex twcss-text-black twcss-space-x-1.5'>
+      <button
+        class='twcss-px-2 twcss-py-2 twcss-font-bold  twcss-transition twcss-duration-300 hover:twcss-text-blue-500 filter-btn active'
+        data-filter='all'
+      >
+        ALL
+      </button>
+      {% comment %}
+        {% for filter in section.settings.filter_options %}
+          <button
+            class='twcss-px-4 twcss-py-2 twcss-border twcss-border-black twcss-font-medium twcss-transition twcss-duration-300 hover:twcss-bg-black hover:twcss-text-white filter-btn'
+            data-filter='{{ filter | handleize }}'
+          >
+            {{ filter | upcase }}
+          </button>
+        {% endfor %}
+      {% endcomment %}
+
+      {% assign filters_array = section.settings.filter_options | split: ', ' %}
+
+      {% for filter in filters_array %}
+        <button
+          class=' twcss-py-2 twcss-px-2   twcss-font-bold  twcss-transition twcss-duration-300 hover:twcss-text-blue-500  filter-btn'
+          data-filter='{{ filter | handleize }}'
+        >
+          {{ filter | upcase }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class='twcss-grid twcss-grid-cols-2 md:twcss-grid-cols-3 twcss-w-full twcss-gap-6 md:twcss-gap-10  lg:twcss-grid-cols-5 '>
+    {% for block in section.blocks %}
+      <div
+        class='twcss-relative twcss-overflow-hidden twcss-group category-item'
+        data-category='{{ block.settings.category_filter | handleize }}'
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.category_image != blank %}
+          {{
+            block.settings.category_image
+            | image_url: width: 300
+            | image_tag:
+              class: 'twcss-w-full twcss-aspect-square  twcss-h-68 twcss-object-cover twcss-transition twcss-duration-300 group-hover:twcss-scale-110',
+              loading: 'lazy',
+              alt: block.settings.category_name
+          }}
+        {% else %}
+          <div class='twcss-w-full twcss-h-64 twcss-bg-gray-200'></div>
+        {% endif %}
+
+        {% if block.settings.category_link != blank %}
+          <a
+            href='{{ block.settings.category_link }}'
+            class='twcss-absolute twcss-inset-0'
+            aria-label='{{ block.settings.category_name }}'
+          >
+            <div class='twcss-absolute twcss-inset-0  twcss-flex twcss-items-center twcss-justify-center twcss-bg-black twcss-bg-opacity-40 twcss-transition twcss-duration-300 group-hover:twcss-bg-opacity-50'>
+              <h3 class='twcss-text-white twcss-text-2xl twcss-cursor-pointer twcss-font-bold twcss-uppercase'>
+                {{ block.settings.category_name }}
+              </h3>
+            </div>
+          </a>
+        {% else %}
+          <div class='twcss-absolute twcss-inset-0 twcss-flex twcss-items-center twcss-justify-center twcss-bg-black twcss-bg-opacity-40 twcss-transition twcss-duration-300 group-hover:twcss-bg-opacity-50'>
+            <h3 class='twcss-text-white twcss-text-2xl twcss-cursor-pointer twcss-font-bold twcss-uppercase  group-hover:twcss-text-4xl twcss-transition-all twcss-duration-500 '>
+              {{ block.settings.category_name }}
+            </h3>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const categories = document.querySelectorAll('.category-item');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const selectedCategory = this.dataset.filter;
+
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        categories.forEach((category) => {
+          if (selectedCategory === 'all' || category.dataset.category === selectedCategory) {
+            category.style.display = 'block';
+          } else {
+            category.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .filter-btn.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Shop Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHOP BY CATEGORIES"
+    },
+    {
+      "type": "textarea",
+      "id": "filter_options",
+      "label": "Filter Options",
+      "default": "Men, Women, Kids",
+      "info": "Comma-separated list of filter options"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "category_link",
+          "label": "Category Link"
+        },
+        {
+          "type": "text",
+          "id": "category_filter",
+          "label": "Category Filter",
+          "info": "Must match one of the filter options"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Categories",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

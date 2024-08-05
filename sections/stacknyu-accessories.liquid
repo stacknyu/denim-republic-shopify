@@ -1,0 +1,106 @@
+{% schema %}
+{
+  "name": "Accessories Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "ACCESSORIES"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accessory_category",
+      "name": "Accessory Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category Image"
+        },
+        {
+          "type": "url",
+          "id": "men_link",
+          "label": "Shop Men Link"
+        },
+        {
+          "type": "url",
+          "id": "women_link",
+          "label": "Shop Women Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accessories Showcase",
+      "blocks": [
+        {
+          "type": "accessory_category"
+        },
+        {
+          "type": "accessory_category"
+        },
+        {
+          "type": "accessory_category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class=' twcss-px-10 md:twcss-px-16 twcss-w-full  twcss-pt-8 md:twcss-pt-16 '>
+  <h2 class='twcss-text-4xl md:twcss-text-5xl  twcss-font-bold twcss-text-center twcss-mb-12'>
+    {{ section.settings.title }}
+  </h2>
+
+  <div class='twcss-grid twcss-grid-cols-1 md:twcss-grid-cols-2 lg:twcss-grid-cols-3 '>
+    {% for block in section.blocks %}
+      {% if block.type == 'accessory_category' %}
+        <div class='twcss-relative twcss-overflow-hidden' {{ block.shopify_attributes }}>
+          {% if block.settings.category_image %}
+            {{
+              block.settings.category_image
+              | image_url: width: 800
+              | image_tag:
+                class: 'twcss-w-full twcss-aspect-square twcss-object-cover',
+                loading: 'lazy',
+                alt: block.settings.category_name
+            }}
+          {% else %}
+            <div class='twcss-w-full twcss-h-64 twcss-bg-gray-200'></div>
+          {% endif %}
+          <div class='twcss-absolute twcss-inset-0 twcss-bg-black twcss-bg-opacity-40 twcss-flex twcss-flex-col twcss-justify-center twcss-items-center'>
+            <h3 class='twcss-text-white twcss-text-5xl md:twcss-text-7xl xl:twcss-text-8xl twcss-uppercase twcss-font-bold twcss-mb-4'>
+              {{ block.settings.category_name }}
+            </h3>
+            <div class='twcss-flex twcss-text-2xl xl:twcss-text-3xl  twcss-font-bold mt-8 twcss-space-x-6'>
+              {% if block.settings.men_link %}
+                <a
+                  href='{{ block.settings.men_link }}'
+                  class='twcss-bg-black twcss-text-white twcss-px-12 twcss-py-6 hover:twcss-bg-red-600 twcss-transition-all twcss-duration-300  '
+                  >Shop Men</a
+                >
+              {% endif %}
+              {% if block.settings.women_link %}
+                <a
+                  href='{{ block.settings.women_link }}'
+                  class='twcss-bg-black twcss-text-white twcss-px-12 twcss-py-6 hover:twcss-bg-red-600 twcss-transition-all twcss-duration-300  '
+                  >Shop Women</a
+                >
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

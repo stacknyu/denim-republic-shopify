@@ -145,6 +145,68 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Custom Fonts"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_custom_font_heading",
+        "label": "Use custom font for headings",
+        "default": false
+      },
+      {
+        "type": "textarea",
+        "id": "custom_heading_font",
+        "label": "Custom heading font URLs",
+        "info": "Enter font URLs, one per line. Format: url@weight"
+      },
+      {
+        "type": "select",
+        "id": "custom_heading_weight",
+        "label": "Custom heading font weight",
+        "options": [
+          { "value": "100", "label": "Thin 100" },
+          { "value": "200", "label": "Extra-light 200" },
+          { "value": "300", "label": "Light 300" },
+          { "value": "400", "label": "Regular 400" },
+          { "value": "500", "label": "Medium 500" },
+          { "value": "600", "label": "Semi-bold 600" },
+          { "value": "700", "label": "Bold 700" },
+          { "value": "800", "label": "Extra-bold 800" },
+          { "value": "900", "label": "Black 900" }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_custom_font_body",
+        "label": "Use custom font for body text",
+        "default": false
+      },
+      {
+        "type": "textarea",
+        "id": "custom_body_font",
+        "label": "Custom body font URLs",
+        "info": "Enter font URLs, one per line. Format: url@weight"
+      },
+      {
+        "type": "select",
+        "id": "custom_body_weight",
+        "label": "Custom body font weight",
+        "options": [
+          { "value": "100", "label": "Thin 100" },
+          { "value": "200", "label": "Extra-light 200" },
+          { "value": "300", "label": "Light 300" },
+          { "value": "400", "label": "Regular 400" },
+          { "value": "500", "label": "Medium 500" },
+          { "value": "600", "label": "Semi-bold 600" },
+          { "value": "700", "label": "Bold 700" },
+          { "value": "800", "label": "Extra-bold 800" },
+          { "value": "900", "label": "Black 900" }
+        ],
+        "default": "400"
       }
     ]
   },

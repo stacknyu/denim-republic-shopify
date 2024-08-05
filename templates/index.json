@@ -1,210 +1,248 @@
 {
   "sections": {
+    "stacknyu_hero_sale_BwpY6L": {
+      "type": "stacknyu-hero-sale",
+      "settings": {
+        "background_image": "shopify:\/\/shop_images\/a55d0e7b413c0f7df60f57bdfe688a7d.gif",
+        "heading": "UP TO 50% OFF SALE",
+        "mainheading": "SALE",
+        "subheading": "FURTHER REDUCTIONS",
+        "button_label": "SHOP NOW",
+        "button_link": "shopify:\/\/products\/the-complete-snowboard"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
       "settings": {
-        "image_overlay_opacity": 40,
+        "image": "shopify:\/\/shop_images\/banner1_1.png",
+        "image_overlay_opacity": 0,
         "image_height": "large",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
+        "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "stacknyu_shop_categories_ErwTY4": {
+      "type": "stacknyu-shop-categories",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "category_NwJEBw": {
+          "type": "category",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "category_image": "shopify:\/\/shop_images\/self-serve-coffee-shop.jpg",
+            "category_name": "Category",
+            "category_link": "",
+            "category_filter": ""
           }
         },
-        "text": {
-          "type": "text",
+        "category_TkwCQF": {
+          "type": "category",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "category_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+            "category_name": "Deep",
+            "category_link": "shopify:\/\/products\/the-compare-at-price-snowboard",
+            "category_filter": "men"
+          }
+        },
+        "category_qkctDd": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
+            "category_name": "Jaydeep",
+            "category_link": "shopify:\/\/pages\/data-sale-opt-out",
+            "category_filter": "women"
+          }
+        },
+        "category_R7dK8F": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify:\/\/shop_images\/a55d0e7b413c0f7df60f57bdfe688a7d.gif",
+            "category_name": "Heep",
+            "category_link": "shopify:\/\/products\/the-compare-at-price-snowboard",
+            "category_filter": "men"
+          }
+        },
+        "category_ePApJT": {
+          "type": "category",
+          "settings": {
+            "category_name": "Category",
+            "category_link": "",
+            "category_filter": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "category_NwJEBw",
+        "category_TkwCQF",
+        "category_qkctDd",
+        "category_R7dK8F",
+        "category_ePApJT"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "heading": "SHOP BY CATEGORIES",
+        "filter_options": "Men, women"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
+    "stacknyu_shop_main_categories_mJURma": {
+      "type": "stacknyu-shop-main-categories",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "category_d3pxyD": {
+          "type": "category",
           "settings": {
-            "collection": ""
+            "category_name": "SHOP MEN",
+            "category_image": "shopify:\/\/shop_images\/person-enjoys-lunch-alone-in-a-sunlit-restaurant.jpg",
+            "category_link": "shopify:\/\/pages\/contact"
           }
         },
-        "product": {
-          "type": "product",
+        "category_E33qrH": {
+          "type": "category",
           "settings": {
-            "product": "",
-            "second_image": false
+            "category_name": "SHOP MEN",
+            "category_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+            "category_link": "shopify:\/\/products\/the-complete-snowboard"
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "category_BiFDiJ": {
+          "type": "category",
           "settings": {
-            "collection": ""
+            "category_name": "SHOP MEN",
+            "category_image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
+            "category_link": ""
+          }
+        },
+        "category_zEzC6M": {
+          "type": "category",
+          "settings": {
+            "category_name": "SHOP MEN",
+            "category_link": ""
           }
         }
       },
       "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
+        "category_d3pxyD",
+        "category_E33qrH",
+        "category_BiFDiJ",
+        "category_zEzC6M"
       ],
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "stacknyu_new_arrivals_JPpJK7": {
+      "type": "stacknyu-new-arrivals",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "size_guide_gUjqDj": {
+          "type": "size_guide",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Men",
+            "image": "shopify:\/\/shop_images\/Size_Chart_Shopify_Slim_Shirt_480x480_cf00379c-25d2-487d-8163-526591590022.webp"
           }
         },
-        "column2": {
-          "type": "column",
+        "size_guide_JWPciN": {
+          "type": "size_guide",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Women",
+            "image": "shopify:\/\/shop_images\/4_shopbop_sizechart_left_758a8a7b-584e-4558-9520-1710c1bbb02d.png"
           }
         },
-        "column3": {
-          "type": "column",
+        "category_LeUBWT": {
+          "type": "category",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "All",
+            "discover_link": "shopify:\/\/collections",
+            "collections": [
+              "frontpage"
+            ]
+          }
+        },
+        "category_AFc73U": {
+          "type": "category",
+          "settings": {
+            "name": "Men",
+            "discover_link": "shopify:\/\/collections\/all",
+            "collections": [
+              "frontpage",
+              "hydrogen",
+              "main"
+            ]
+          }
+        },
+        "category_TziJMc": {
+          "type": "category",
+          "settings": {
+            "name": "Women",
+            "discover_link": "shopify:\/\/collections\/all",
+            "collections": [
+              "automated-collection",
+              "frontpage",
+              "hydrogen",
+              "main"
+            ]
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "size_guide_gUjqDj",
+        "size_guide_JWPciN",
+        "category_LeUBWT",
+        "category_AFc73U",
+        "category_TziJMc"
       ],
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "title": "NEW ARRIVALS",
+        "guide_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+        "guide_title": "OUR FITS",
+        "guide_subtitle": "THE JEANS GUIDE"
+      }
+    },
+    "stacknyu_accessories_nP8bNw": {
+      "type": "stacknyu-accessories",
+      "blocks": {
+        "accessory_category_ke6X8G": {
+          "type": "accessory_category",
+          "settings": {
+            "category_name": "Tie & More",
+            "category_image": "shopify:\/\/shop_images\/banner1_1.png",
+            "men_link": "shopify:\/\/blogs\/news",
+            "women_link": "shopify:\/\/blogs\/news"
+          }
+        },
+        "accessory_category_idPTYU": {
+          "type": "accessory_category",
+          "settings": {
+            "category_name": "Category",
+            "men_link": "",
+            "women_link": ""
+          }
+        },
+        "accessory_category_PpeP7C": {
+          "type": "accessory_category",
+          "settings": {
+            "category_name": "Category",
+            "men_link": "",
+            "women_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "accessory_category_ke6X8G",
+        "accessory_category_idPTYU",
+        "accessory_category_PpeP7C"
+      ],
+      "settings": {
+        "title": "ACCESSORIES"
       }
     }
   },
   "order": [
+    "stacknyu_hero_sale_BwpY6L",
     "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "stacknyu_shop_categories_ErwTY4",
+    "stacknyu_shop_main_categories_mJURma",
+    "stacknyu_new_arrivals_JPpJK7",
+    "stacknyu_accessories_nP8bNw"
   ]
 }
