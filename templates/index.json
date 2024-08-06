@@ -30,61 +30,66 @@
     "stacknyu_shop_categories_ErwTY4": {
       "type": "stacknyu-shop-categories",
       "blocks": {
-        "category_NwJEBw": {
-          "type": "category",
-          "settings": {
-            "category_image": "shopify:\/\/shop_images\/self-serve-coffee-shop.jpg",
-            "category_name": "Category",
-            "category_link": "",
-            "category_filter": ""
-          }
-        },
         "category_TkwCQF": {
           "type": "category",
           "settings": {
-            "category_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
             "category_name": "Deep",
-            "category_link": "shopify:\/\/products\/the-compare-at-price-snowboard",
-            "category_filter": "men"
+            "collections": [
+              "automated-collection"
+            ]
           }
         },
         "category_qkctDd": {
           "type": "category",
           "settings": {
-            "category_image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
             "category_name": "Jaydeep",
-            "category_link": "shopify:\/\/pages\/data-sale-opt-out",
-            "category_filter": "women"
+            "collections": [
+              "frontpage",
+              "hydrogen"
+            ]
           }
         },
         "category_R7dK8F": {
           "type": "category",
           "settings": {
-            "category_image": "shopify:\/\/shop_images\/a55d0e7b413c0f7df60f57bdfe688a7d.gif",
             "category_name": "Heep",
-            "category_link": "shopify:\/\/products\/the-compare-at-price-snowboard",
-            "category_filter": "men"
+            "collections": [
+              "automated-collection",
+              "main"
+            ]
+          }
+        },
+        "category_YbTGc4": {
+          "type": "category",
+          "settings": {
+            "category_name": "Category",
+            "collections": [
+
+            ]
           }
         },
         "category_ePApJT": {
           "type": "category",
           "settings": {
             "category_name": "Category",
-            "category_link": "",
-            "category_filter": ""
+            "collections": [
+              "automated-collection",
+              "frontpage",
+              "hydrogen",
+              "main"
+            ]
           }
         }
       },
       "block_order": [
-        "category_NwJEBw",
         "category_TkwCQF",
         "category_qkctDd",
         "category_R7dK8F",
+        "category_YbTGc4",
         "category_ePApJT"
       ],
       "settings": {
-        "heading": "SHOP BY CATEGORIES",
-        "filter_options": "Men, women"
+        "heading": "SHOP BY CATEGORIES"
       }
     },
     "stacknyu_shop_main_categories_mJURma": {
@@ -235,6 +240,78 @@
       "settings": {
         "title": "ACCESSORIES"
       }
+    },
+    "stacknyu_social_gallery_XV79wk": {
+      "type": "stacknyu-social-gallery",
+      "blocks": {
+        "custom_4P4AHn": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/self-serve-coffee-shop.jpg",
+            "link": ""
+          }
+        },
+        "custom_KKr4nD": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg",
+            "link": ""
+          }
+        },
+        "custom_Q7eg6X": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/person-enjoys-lunch-alone-in-a-sunlit-restaurant.jpg",
+            "link": ""
+          }
+        },
+        "custom_8KLqF4": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+            "link": ""
+          }
+        },
+        "custom_azRcn7": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/banner1_1.png",
+            "link": ""
+          }
+        },
+        "custom_jD9QDr": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/snowboard_sky.png",
+            "link": ""
+          }
+        },
+        "custom_dWgjVd": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_4P4AHn",
+        "custom_KKr4nD",
+        "custom_Q7eg6X",
+        "custom_8KLqF4",
+        "custom_azRcn7",
+        "custom_jD9QDr",
+        "custom_dWgjVd"
+      ],
+      "settings": {
+      }
+    },
+    "stacknyu_newsletter_BCBAgG": {
+      "type": "stacknyu-newsletter",
+      "settings": {
+        "newsletter_heading": "Join us and receive a voucher code",
+        "newsletter_subtext": "<p>15% off on your first purchase (SALE items excluded) and always free<strong> shipping for all new Denim Republic newsletter subscribers<\/strong><\/p>"
+      }
     }
   },
   "order": [
@@ -243,6 +320,8 @@
     "stacknyu_shop_categories_ErwTY4",
     "stacknyu_shop_main_categories_mJURma",
     "stacknyu_new_arrivals_JPpJK7",
-    "stacknyu_accessories_nP8bNw"
+    "stacknyu_accessories_nP8bNw",
+    "stacknyu_social_gallery_XV79wk",
+    "stacknyu_newsletter_BCBAgG"
   ]
 }

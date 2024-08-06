@@ -5,40 +5,45 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-bar-0": {
+        "announcement_UJxcAB": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "link": ""
+            "text": "EXCLUSIVE HOLIDAY DEALS: SHOP NOW FOR LIMITED-TIME DISCOUNTS! Shop Now",
+            "link": "shopify:\/\/products\/gift-card"
+          }
+        },
+        "announcement_b7DMT9": {
+          "type": "announcement",
+          "settings": {
+            "text": "FLASH SALE! Score Up to 40% Off Clothes & Accessories - Limited Stock! Shop Now",
+            "link": "shopify:\/\/collections"
+          }
+        },
+        "announcement_ypnGBy": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING ON ALL ORDERS OVER $100 – SHOP NOW",
+            "link": "shopify:\/\/collections\/automated-collection"
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement_UJxcAB",
+        "announcement_b7DMT9",
+        "announcement_ypnGBy"
       ],
       "settings": {
       }
     },
-    "header": {
-      "type": "header",
+    "stacknyu-header": {
+      "type": "stacknyu-header",
       "settings": {
-        "logo_position": "middle-left",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "menu": "main-sup"
       }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "stacknyu-header"
   ]
 }

@@ -1,0 +1,73 @@
+<div class='twcss-px-10 twcss-w-full md:twcss-px-16 twcss-py-8 md:twcss-py-24'>
+  <h2 class='twcss-text-4xl md:twcss-text-5xl  twcss-font-bold md:twcss-mb-8 twcss-uppercase twcss-mb-4'>
+    Latest On Social
+  </h2>
+
+  <div class='twcss-grid md:twcss-grid-flow-col twcss-grid-cols-1  lg:twcss-grid-cols-5 twcss-gap-6'>
+    {% for block in section.blocks %}
+      <a
+        class='{% if forloop.index == 5 %}md:twcss-col-span-2 md:twcss-row-span-2{% else %}twcss-col-span-1{% endif %}'
+
+        href='{{ block.settings.link | default: "#" }}'
+        class='twcss-block twcss-relative twcss-overflow-hidden twcss-aspect-w-1 twcss-aspect-h-1 md:twcss-aspect-w-16 md:twcss-aspect-h-9'
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.image != blank %}
+          {{
+            block.settings.image
+            | image_url: width: 400
+            | image_tag:
+              class: 'twcss-w-full  twcss-aspect-square twcss-h-full twcss-object-cover',
+              loading: 'lazy',
+              alt: block.settings.category_name
+          }}
+        {% else %}
+          <div class='twcss-w-full twcss-h-full twcss-bg-gray-200'></div>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Social Gallery",
+  "max_blocks": 7,
+  "blocks": [
+    {
+      "type": "custom",
+      "name": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Gallery",
+      "blocks": [
+        {
+          "type": "custom"
+        },
+        {
+          "type": "custom"
+        },
+        {
+          "type": "custom"
+        },
+        {
+          "type": "custom"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
