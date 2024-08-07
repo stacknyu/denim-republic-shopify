@@ -1,174 +1,486 @@
-{{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'login.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+<div id='main-bg' class=' twcss-bg-[#f3f3f3] twcss-w-full twcss-py-28'>
+  <div
+    class=' twcss-max-w-4xl twcss-mx-auto twcss-px-6 twcss-text-center login '
+  >
+    <h1 class=' twcss-text-left twcss-font-bold '>Become a member</h1>
+    <p class='twcss-mb-8'>To become a Denim Republic member, please sign up for free.</p>
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+    {%- form 'create_customer', novalidate: 'novalidate', class: 'twcss-space-y-6' -%}
+      {%- if form.errors -%}
+        <div
+          class=' twcss-border twcss-text-left twcss-border-red-400 twcss-text-red-700 twcss-px-4 twcss-py-3 twcss-rounded twcss-relative twcss-mb-6'
+        >
+          <h2 class='twcss-font-bold twcss-mb-2 twcss-text-2xl' tabindex='-1' autofocus>
+            <svg
+              class='twcss-inline twcss-w-5 twcss-h-5 twcss-mr-2'
+              aria-hidden='true'
+              focusable='false'
+              fill='currentColor'
+              viewBox='0 0 20 20'
+            >
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            {{ 'templates.contact.form.error_heading' | t }}
+          </h2>
+          <ul class='twcss-list-disc twcss-list-inside'>
+            {%- for field in form.errors -%}
+              <li>
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  <a href='#RegisterForm-{{ field }}' class='twcss-underline'>
+                    {{ form.errors.translated_fields[field] | capitalize }}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      <div class='twcss-pt-4'>
+        <h2 class=' twcss-font-semibold twcss-mb-4 twcss-text-3xl twcss-text-left'>Login info</h2>
+        <div class=''>
+          <div>
+            <label for='RegisterForm-email' class='twcss-sr-only'>{{ 'customer.register.email' | t }}</label>
+            <input
+              type='email'
+              name='customer[email]'
+              id='RegisterForm-email'
+              autocomplete='email'
+              placeholder='{{ 'customer.register.email' | t }}'
+              class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black  focus:twcss-shadow-none twcss-outline-none twcss-ring-0  twcss-flex twcss-border twcss-px-6 twcss-py-4'
+              required
+            >
+          </div>
+          <div>
+            <label for='RegisterForm-password' class='twcss-sr-only'>{{ 'customer.register.password' | t }}</label>
+            <input
+              type='password'
+              name='customer[password]'
+              id='RegisterForm-password'
+              placeholder='{{ 'customer.register.password' | t }}'
+              class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black  focus:twcss-shadow-none twcss-outline-none twcss-ring-0  twcss-flex twcss-border twcss-px-6 twcss-py-4'
+              required
+            >
+          </div>
+          {% comment %}
+            <div>
+              <label for='RegisterForm-password-confirm' class='twcss-sr-only'>
+                {{- 'customer.register.password_confirm' | t -}}
+              </label>
+              <input
+                type='password'
+                name='customer[password_confirmation]'
+                id='RegisterForm-password-confirm'
+                placeholder='{{ 'customer.register.password_confirm' | t }}'
+                class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+                required
+              >
+            </div>
+          {% endcomment %}
+        </div>
+      </div>
 
-<div class="customer register section-{{ section.id }}-padding">
-  <svg style="display: none">
-    <symbol id="icon-error" viewBox="0 0 13 13">
-      <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
-      <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
-      <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
-      <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
-    </symbol>
-  </svg>
-  <h1>
-    {{ 'customer.register.title' | t }}
-  </h1>
-  {%- form 'create_customer', novalidate: 'novalidate' -%}
-    {%- if form.errors -%}
-      <h2 class="form__message" tabindex="-1" autofocus>
-        <svg aria-hidden="true" focusable="false">
-          <use href="#icon-error" />
-        </svg>
-        {{ 'templates.contact.form.error_heading' | t }}
-      </h2>
-      <ul>
-        {%- for field in form.errors -%}
-          <li>
-            {%- if field == 'form' -%}
-              {{ form.errors.messages[field] }}
-            {%- else -%}
-              <a href="#RegisterForm-{{ field }}">
-                {{ form.errors.translated_fields[field] | capitalize }}
-                {{ form.errors.messages[field] }}
-              </a>
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
-    <div class="field">
-      <input
-        type="text"
-        name="customer[first_name]"
-        id="RegisterForm-FirstName"
-        {% if form.first_name %}
-          value="{{ form.first_name }}"
-        {% endif %}
-        autocomplete="given-name"
-        placeholder="{{ 'customer.register.first_name' | t }}"
-      >
-      <label for="RegisterForm-FirstName">
-        {{ 'customer.register.first_name' | t }}
-      </label>
-    </div>
-    <div class="field">
-      <input
-        type="text"
-        name="customer[last_name]"
-        id="RegisterForm-LastName"
-        {% if form.last_name %}
-          value="{{ form.last_name }}"
-        {% endif %}
-        autocomplete="family-name"
-        placeholder="{{ 'customer.register.last_name' | t }}"
-      >
-      <label for="RegisterForm-LastName">
-        {{ 'customer.register.last_name' | t }}
-      </label>
-    </div>
-    <div class="field">
-      <input
-        type="email"
-        name="customer[email]"
-        id="RegisterForm-email"
-        {% if form.email %}
-          value="{{ form.email }}"
-        {% endif %}
-        spellcheck="false"
-        autocapitalize="off"
-        autocomplete="email"
-        aria-required="true"
-        {% if form.errors contains 'email' %}
-          aria-invalid="true"
-          aria-describedby="RegisterForm-email-error"
-        {% endif %}
-        placeholder="{{ 'customer.register.email' | t }}"
-      >
-      <label for="RegisterForm-email">
-        {{ 'customer.register.email' | t }}
-      </label>
-    </div>
-    {%- if form.errors contains 'email' -%}
-      <span id="RegisterForm-email-error" class="form__message">
-        <svg aria-hidden="true" focusable="false">
-          <use href="#icon-error" />
-        </svg>
-        {{ form.errors.translated_fields.email | capitalize }}
-        {{ form.errors.messages.email }}.
-      </span>
-    {%- endif -%}
-    <div class="field">
-      <input
-        type="password"
-        name="customer[password]"
-        id="RegisterForm-password"
-        aria-required="true"
-        {% if form.errors contains 'password' %}
-          aria-invalid="true"
-          aria-describedby="RegisterForm-password-error"
-        {% endif %}
-        placeholder="{{ 'customer.register.password' | t }}"
-      >
-      <label for="RegisterForm-password">
-        {{ 'customer.register.password' | t }}
-      </label>
-    </div>
-    {%- if form.errors contains 'password' -%}
-      <span id="RegisterForm-password-error" class="form__message">
-        <svg aria-hidden="true" focusable="false">
-          <use href="#icon-error" />
-        </svg>
-        {{ form.errors.translated_fields.password | capitalize }}
-        {{ form.errors.messages.password }}.
-      </span>
-    {%- endif -%}
-    <button>
-      {{ 'customer.register.submit' | t }}
-    </button>
-  {%- endform -%}
+      <div class='twcss-flex twcss-items-start twcss-gap-2 twcss-text-black'>
+        <input type='checkbox' id='newsletter' name='customer[note][accepts_marketing]' class='twcss-mr-2'>
+        <label for='newsletter' class='twcss-text-base twcss-text-left -twcss-mt-1'>
+          <p class='twcss-font-semibold twcss-text-lg'>Newsletter:</p>
+          Denim Republic may email me about Denim Republic products and link me to my favorite Denim Republic store. If
+          you are already subscribed, not selecting this option will opt you out for the newsletter. I accept the
+          Privacy Policy
+        </label>
+      </div>
+
+      <div class='twcss-pt-8'>
+        <h2 class=' twcss-font-semibold twcss-mb-4 twcss-text-3xl twcss-text-left'>Information</h2>
+
+        <div class='twcss-space-y-4'>
+          <div>
+            <label class='twcss-block twcss-mb-2 twcss-text-left'>Gender</label>
+            <div class='twcss-flex twcss-space-x-4'>
+              <label class='twcss-flex twcss-items-center'>
+                <input type='radio' name='customer[note][gender]' value='male' class='twcss-mr-2'>
+                Male
+              </label>
+              <label class='twcss-flex twcss-items-center'>
+                <input type='radio' name='customer[note][gender]' value='female' class='twcss-mr-2'>
+                Female
+              </label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for='RegisterForm-FirstName' class='twcss-sr-only'>{{ 'customer.register.first_name' | t }}</label>
+              <input
+                type='text'
+                name='customer[note][first_name]'
+                id='RegisterForm-FirstName'
+                autocomplete='given-name'
+                placeholder='{{ 'customer.register.first_name' | t }}'
+                class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black  focus:twcss-shadow-none twcss-outline-none twcss-ring-0  twcss-flex twcss-border twcss-px-6 twcss-py-4'
+              >
+            </div>
+            <div>
+              <label for='RegisterForm-LastName' class='twcss-sr-only'>{{ 'customer.register.last_name' | t }}</label>
+              <input
+                type='text'
+                name='customer[note][last_name]'
+                id='RegisterForm-LastName'
+                autocomplete='family-name'
+                placeholder='{{ 'customer.register.last_name' | t }}'
+                class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black  focus:twcss-shadow-none twcss-outline-none twcss-ring-0  twcss-flex twcss-border twcss-px-6 twcss-py-4'
+              >
+            </div>
+            <div x-data='dateOfBirth()'>
+              <div class='twcss-grid twcss-grid-cols-3 '>
+                <!-- Day Dropdown -->
+                <div x-data='{ open: false }' class='twcss-relative'>
+                  <button
+                    type='button'
+                    @click.prevent='open = !open'
+                    @click.away='open = false'
+                    class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black focus:twcss-shadow-none twcss-outline-none twcss-ring-0 twcss-flex twcss-border twcss-px-6 twcss-py-4 twcss-justify-between twcss-items-center'
+                  >
+                    <span x-text="day || 'Day'" class='twcss-text-left twcss-flex-grow'></span>
+                    <svg
+                      class='twcss-h-5 twcss-w-5 twcss-text-gray-400'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                      aria-hidden='true'
+                    >
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div
+                    x-show='open'
+                    class='twcss-absolute twcss-z-10 twcss-w-full twcss-mt-1 twcss-bg-white twcss-shadow-lg twcss-max-h-60 twcss-rounded-md twcss-py-1 twcss-text-base twcss-ring-1 twcss-ring-black twcss-ring-opacity-5 twcss-overflow-auto twcss-focus:twcss-outline-none twcss-sm:twcss-text-sm'
+                  >
+                    <div
+                      @click.prevent="day = ''; open = false"
+                      class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                    >
+                      Day
+                    </div>
+                    <template x-for='i in 31' :key='i'>
+                      <div
+                        @click.prevent='day = i; open = false'
+                        class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                        x-text='i'
+                      ></div>
+                    </template>
+                  </div>
+                  <input type='hidden' name='customer[note][birth_day]' :value='day'>
+                </div>
+
+                <!-- Month Dropdown -->
+                <div x-data='{ open: false }' class='twcss-relative'>
+                  <button
+                    type='button'
+                    @click.prevent='open = !open'
+                    @click.away='open = false'
+                    class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black focus:twcss-shadow-none twcss-outline-none twcss-ring-0 twcss-flex twcss-border twcss-px-6 twcss-py-4 twcss-justify-between twcss-items-center'
+                  >
+                    <span x-text="month || 'Month'" class='twcss-text-left twcss-flex-grow'></span>
+                    <svg
+                      class='twcss-h-5 twcss-w-5 twcss-text-gray-400'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                      aria-hidden='true'
+                    >
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div
+                    x-show='open'
+                    class='twcss-absolute twcss-z-10 twcss-w-full twcss-mt-1 twcss-bg-white twcss-shadow-lg twcss-max-h-60 twcss-rounded-md twcss-py-1 twcss-text-base twcss-ring-1 twcss-ring-black twcss-ring-opacity-5 twcss-overflow-auto twcss-focus:twcss-outline-none twcss-sm:twcss-text-sm'
+                  >
+                    <div
+                      @click.prevent="month = ''; open = false"
+                      class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                    >
+                      Month
+                    </div>
+                    <template x-for='(monthName, index) in months' :key='index'>
+                      <div
+                        @click.prevent='month = monthName; open = false'
+                        class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                        x-text='monthName'
+                      ></div>
+                    </template>
+                  </div>
+                  <input type='hidden' name='customer[note][birth_month]' :value='months.indexOf(month) + 1'>
+                </div>
+
+                <!-- Year Dropdown -->
+                <div x-data='{ open: false }' class='twcss-relative'>
+                  <button
+                    type='button'
+                    @click.prevent='open = !open'
+                    @click.away='open = false'
+                    class='twcss-w-full focus:twcss-outline-none twcss-border-black focus:twcss-ring-1 twcss-ring-slate-800 placeholder:twcss-text-black focus:twcss-shadow-none twcss-outline-none twcss-ring-0 twcss-flex twcss-border twcss-px-6 twcss-py-4 twcss-justify-between twcss-items-center'
+                  >
+                    <span x-text="year || 'Year'" class='twcss-text-left twcss-flex-grow'></span>
+                    <svg
+                      class='twcss-h-5 twcss-w-5 twcss-text-gray-400'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                      aria-hidden='true'
+                    >
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div
+                    x-show='open'
+                    class='twcss-absolute twcss-z-10 twcss-w-full twcss-mt-1 twcss-bg-white twcss-shadow-lg twcss-max-h-60 twcss-rounded-md twcss-py-1 twcss-text-base twcss-ring-1 twcss-ring-black twcss-ring-opacity-5 twcss-overflow-auto twcss-focus:twcss-outline-none twcss-sm:twcss-text-sm'
+                  >
+                    <div
+                      @click.prevent="year = ''; open = false"
+                      class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                    >
+                      Year
+                    </div>
+                    <template x-for='y in years' :key='y'>
+                      <div
+                        @click.prevent='year = y; open = false'
+                        class='twcss-cursor-default twcss-select-none twcss-text-2xl twcss-relative twcss-py-2 twcss-px-6 twcss-hover:twcss-bg-slate-800 twcss-hover:twcss-text-white'
+                        x-text='y'
+                      ></div>
+                    </template>
+                  </div>
+                  <input type='hidden' name='customer[note][birth_year]' :value='year'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='twcss-flex twcss-justify-between twcss-items-center'>
+        <a href='{{ routes.root_url }}' class='twcss-text-gray-600 twcss-hover:underline'>‹ Back</a>
+        <button
+          type='submit'
+          class='twcss-bg-black twcss-text-white twcss-px-6 twcss-py-2 twcss-rounded twcss-hover:bg-gray-800'
+        >
+          continue
+        </button>
+      </div>
+    {%- endform -%}
+  </div>
 </div>
+
+{% comment %}
+  <div class='twcss-container twcss-mx-auto twcss-max-w-2xl twcss-px-4 twcss-py-8'>
+    <h1 class='twcss-text-4xl twcss-font-bold twcss-mb-6'>Become a member</h1>
+    <p class='twcss-mb-8'>To become a Denim Republic member, please sign up for free.</p>
+
+    {%- form 'create_customer', novalidate: 'novalidate', class: 'twcss-space-y-6' -%}
+      {%- if form.errors -%}
+        <div
+          class=' twcss-border twcss-border-red-400 twcss-text-red-700 twcss-px-4 twcss-py-3 twcss-rounded twcss-relative twcss-mb-6'
+        >
+          <h2 class='twcss-font-bold twcss-mb-2 twcss-text-2xl' tabindex='-1' autofocus>
+            <svg
+              class='twcss-inline twcss-w-5 twcss-h-5 twcss-mr-2'
+              aria-hidden='true'
+              focusable='false'
+              fill='currentColor'
+              viewBox='0 0 20 20'
+            >
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            {{ 'templates.contact.form.error_heading' | t }}
+          </h2>
+          <ul class='twcss-list-disc twcss-list-inside'>
+            {%- for field in form.errors -%}
+              <li>
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  <a href='#RegisterForm-{{ field }}' class='twcss-underline'>
+                    {{ form.errors.translated_fields[field] | capitalize }}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      <div>
+        <h2 class='twcss-text-2xl twcss-font-semibold twcss-mb-4'>Login info</h2>
+        <div class='twcss-space-y-4'>
+          <div>
+            <label for='RegisterForm-email' class='twcss-sr-only'>{{ 'customer.register.email' | t }}</label>
+            <input
+              type='email'
+              name='customer[email]'
+              id='RegisterForm-email'
+              autocomplete='email'
+              placeholder='{{ 'customer.register.email' | t }}'
+              class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+              required
+            >
+          </div>
+          <div>
+            <label for='RegisterForm-password' class='twcss-sr-only'>{{ 'customer.register.password' | t }}</label>
+            <input
+              type='password'
+              name='customer[password]'
+              id='RegisterForm-password'
+              placeholder='{{ 'customer.register.password' | t }}'
+              class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+              required
+            >
+          </div>
+          {% comment %}
+            <div>
+              <label for='RegisterForm-password-confirm' class='twcss-sr-only'>
+                {{- 'customer.register.password_confirm' | t -}}
+              </label>
+              <input
+                type='password'
+                name='customer[password_confirmation]'
+                id='RegisterForm-password-confirm'
+                placeholder='{{ 'customer.register.password_confirm' | t }}'
+                class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+                required
+              >
+            </div>
+          {% endcomment %}
+        </div>
+      </div>
+
+      <div class='twcss-flex twcss-items-center'>
+        <input type='checkbox' id='newsletter' name='customer[accepts_marketing]' class='twcss-mr-2'>
+        <label for='newsletter' class='twcss-text-sm'>
+          Newsletter: Denim Republic may email me about Denim Republic products and link me to my favorite Denim Republic
+          store. If you are already subscribed, not selecting this option will opt you out for the newsletter. I accept
+          the Privacy Policy
+        </label>
+      </div>
+
+      <div>
+        <h2 class='twcss-text-2xl twcss-font-semibold twcss-mb-4'>Information</h2>
+        <div class='twcss-space-y-4'>
+          <div>
+            <label class='twcss-block twcss-mb-2'>Gender</label>
+            <div class='twcss-flex twcss-space-x-4'>
+              <label class='twcss-flex twcss-items-center'>
+                <input type='radio' name='customer[gender]' value='male' class='twcss-mr-2'>
+                Male
+              </label>
+              <label class='twcss-flex twcss-items-center'>
+                <input type='radio' name='customer[gender]' value='female' class='twcss-mr-2'>
+                Female
+              </label>
+            </div>
+          </div>
+          <div>
+            <label for='RegisterForm-FirstName' class='twcss-sr-only'>{{ 'customer.register.first_name' | t }}</label>
+            <input
+              type='text'
+              name='customer[first_name]'
+              id='RegisterForm-FirstName'
+              autocomplete='given-name'
+              placeholder='{{ 'customer.register.first_name' | t }}'
+              class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+            >
+          </div>
+          <div>
+            <label for='RegisterForm-LastName' class='twcss-sr-only'>{{ 'customer.register.last_name' | t }}</label>
+            <input
+              type='text'
+              name='customer[last_name]'
+              id='RegisterForm-LastName'
+              autocomplete='family-name'
+              placeholder='{{ 'customer.register.last_name' | t }}'
+              class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+            >
+          </div>
+          <div class='twcss-flex twcss-space-x-4'>
+            <div class='twcss-w-1/3'>
+              <label for='birthdate' class='twcss-sr-only'>Date of birth</label>
+              <input
+                type='text'
+                id='birthdate'
+                name='customer[note][birthdate]'
+                placeholder='Date of birth'
+                class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+              >
+            </div>
+            <div class='twcss-w-1/3'>
+              <select
+                name='customer[note][birth_month]'
+                class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+              >
+                <option value=''>Month</option>
+                <!-- Add month options here -->
+              </select>
+            </div>
+            <div class='twcss-w-1/3'>
+              <select
+                name='customer[note][birth_year]'
+                class='twcss-w-full twcss-p-3 twcss-border twcss-border-gray-300 twcss-rounded'
+              >
+                <option value=''>Year</option>
+                <!-- Add year options here -->
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='twcss-flex twcss-justify-between twcss-items-center'>
+        <a href='{{ routes.root_url }}' class='twcss-text-gray-600 twcss-hover:underline'>‹ Back</a>
+        <button
+          type='submit'
+          class='twcss-bg-black twcss-text-white twcss-px-6 twcss-py-2 twcss-rounded twcss-hover:bg-gray-800'
+        >
+          continue
+        </button>
+      </div>
+    {%- endform -%}
+  </div>
+{% endcomment %}
+
+<script>
+  function dateOfBirth() {
+    return {
+      day: '',
+      month: '',
+      year: '',
+      years: [],
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+      init() {
+        const currentYear = new Date().getFullYear();
+        this.years = Array.from({ length: 50 }, (_, i) => currentYear - i);
+      },
+    };
+  }
+</script>
 
 {% schema %}
 {
   "name": "t:sections.main-register.name",
-  "settings": [
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

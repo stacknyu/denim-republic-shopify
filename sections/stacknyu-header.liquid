@@ -481,6 +481,11 @@
   </nav>
 {% endcomment %}
 
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
 <nav
   class='twcss-bg-white  twcss-border-b-2  twcss-border-gray-200 twcss-flex twcss-flex-col lg:twcss-flex-row md:twcss-justify-between twcss-items-stretch  md:twcss-mx-auto twcss-px-4'
   x-data='{ mobileMenuOpen: false }'
@@ -529,14 +534,23 @@
     :class="{'twcss-hidden': !mobileMenuOpen, 'twcss-flex': mobileMenuOpen}"
   >
     {% for link in linklists[section.settings.menu].links %}
-      <li class='twcss-relative twcss-group' x-data='{ open: false }'>
+      <li
+        class='twcss-relative twcss-group'
+        x-data='{ open: false }'
+        x-cloak
+        :class=" ( '{{ forloop.index }}' >  4) ? ' max-xl:twcss-hidden' : ' '"
+      >
         <a
           href='{{ link.url }}'
-          class=' lg:twcss-inline-flex twcss-px-4 twcss-py-2 lg:twcss-py-[21px] twcss-text-black hover:twcss-text-red-600 twcss-uppercase twcss-font-bold twcss-text-xl lg:twcss-text-3xl twcss-flex twcss-items-center'
+          class=' lg:twcss-inline-flex twcss-px-4 twcss-py-2 lg:twcss-py-[21px] twcss-text-black hover:twcss-text-red-600 twcss-uppercase  twcss-flex twcss-items-center'
           @mouseenter='open = true'
           @mouseleave='open = false'
         >
-          {{ link.title }}
+          <h1
+            class='twcss-font-bold twcss-text-xl lg:twcss-text-2xl'
+          >
+            {{ link.title }}
+          </h1>
           {% if link.links != blank %}
             <svg
               class='twcss-w-6 twcss-h-6 twcss-ml-1'
@@ -640,7 +654,7 @@
         name='q'
         value='{{ search.terms | escape }}'
         placeholder='{{ 'general.search.search' | t }}'
-        class='twcss-outline-0 twcss-ring-0 twcss-border-0 focus:twcss-outline-0 focus:twcss-ring-0 twcss-text-black twcss-font-medium twcss-text-3xl'
+        class='twcss-outline-0 twcss-ring-0 twcss-max-w-[130px] twcss-border-0 focus:twcss-outline-0 focus:twcss-ring-0 twcss-text-black twcss-font-medium twcss-text-3xl'
       >
       <button
         type='submit'

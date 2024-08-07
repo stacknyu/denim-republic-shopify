@@ -8,7 +8,7 @@
         "mainheading": "SALE",
         "subheading": "FURTHER REDUCTIONS",
         "button_label": "SHOP NOW",
-        "button_link": "shopify:\/\/products\/the-complete-snowboard"
+        "button_link": "shopify:\/\/collections\/all"
       }
     },
     "image_banner": {
@@ -33,60 +33,47 @@
         "category_TkwCQF": {
           "type": "category",
           "settings": {
-            "category_name": "Deep",
+            "category_name": "All",
             "collections": [
-              "automated-collection"
-            ]
-          }
-        },
-        "category_qkctDd": {
-          "type": "category",
-          "settings": {
-            "category_name": "Jaydeep",
-            "collections": [
-              "frontpage",
-              "hydrogen"
-            ]
-          }
-        },
-        "category_R7dK8F": {
-          "type": "category",
-          "settings": {
-            "category_name": "Heep",
-            "collections": [
-              "automated-collection",
-              "main"
-            ]
-          }
-        },
-        "category_YbTGc4": {
-          "type": "category",
-          "settings": {
-            "category_name": "Category",
-            "collections": [
-
+              "accessories",
+              "adults",
+              "belts",
+              "body",
+              "christmas-sale"
             ]
           }
         },
         "category_ePApJT": {
           "type": "category",
           "settings": {
-            "category_name": "Category",
+            "category_name": "Men",
             "collections": [
-              "automated-collection",
-              "frontpage",
-              "hydrogen",
-              "main"
+              "mens-blazer",
+              "mens-bottoms",
+              "mens-cargo-pants",
+              "mens-chinos",
+              "mens-hoodies"
+            ]
+          }
+        },
+        "category_iWg6QD": {
+          "type": "category",
+          "settings": {
+            "category_name": "Women",
+            "collections": [
+              "womens-bottoms",
+              "womens-dresses",
+              "womens-jeans",
+              "womens-tops",
+              "womens"
             ]
           }
         }
       },
       "block_order": [
         "category_TkwCQF",
-        "category_qkctDd",
-        "category_R7dK8F",
-        "category_YbTGc4",
-        "category_ePApJT"
+        "category_ePApJT",
+        "category_iWg6QD"
       ],
       "settings": {
         "heading": "SHOP BY CATEGORIES"
@@ -99,30 +86,31 @@
           "type": "category",
           "settings": {
             "category_name": "SHOP MEN",
-            "category_image": "shopify:\/\/shop_images\/person-enjoys-lunch-alone-in-a-sunlit-restaurant.jpg",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_217_b3b73fe5-8222-48cd-b8e1-f57e83466e02.png",
             "category_link": "shopify:\/\/pages\/contact"
           }
         },
         "category_E33qrH": {
           "type": "category",
           "settings": {
-            "category_name": "SHOP MEN",
-            "category_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+            "category_name": "SHOP WOMEN",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_217_1.png",
             "category_link": "shopify:\/\/products\/the-complete-snowboard"
           }
         },
         "category_BiFDiJ": {
           "type": "category",
           "settings": {
-            "category_name": "SHOP MEN",
-            "category_image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
+            "category_name": "SHOP KIDS",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_218.png",
             "category_link": ""
           }
         },
         "category_zEzC6M": {
           "type": "category",
           "settings": {
-            "category_name": "SHOP MEN",
+            "category_name": "Shop Accessories",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_217_2.png",
             "category_link": ""
           }
         }
@@ -143,14 +131,14 @@
           "type": "size_guide",
           "settings": {
             "name": "Men",
-            "image": "shopify:\/\/shop_images\/Size_Chart_Shopify_Slim_Shirt_480x480_cf00379c-25d2-487d-8163-526591590022.webp"
+            "url": "shopify:\/\/collections\/mens-blazer"
           }
         },
         "size_guide_JWPciN": {
           "type": "size_guide",
           "settings": {
             "name": "Women",
-            "image": "shopify:\/\/shop_images\/4_shopbop_sizechart_left_758a8a7b-584e-4558-9520-1710c1bbb02d.png"
+            "url": "shopify:\/\/collections\/womens"
           }
         },
         "category_LeUBWT": {
@@ -159,7 +147,9 @@
             "name": "All",
             "discover_link": "shopify:\/\/collections",
             "collections": [
-              "frontpage"
+              "accessories",
+              "adults",
+              "belts"
             ]
           }
         },
@@ -169,9 +159,9 @@
             "name": "Men",
             "discover_link": "shopify:\/\/collections\/all",
             "collections": [
-              "frontpage",
-              "hydrogen",
-              "main"
+              "mens-blazer",
+              "mens-bottoms",
+              "mens-cargo-pants"
             ]
           }
         },
@@ -181,10 +171,9 @@
             "name": "Women",
             "discover_link": "shopify:\/\/collections\/all",
             "collections": [
-              "automated-collection",
-              "frontpage",
-              "hydrogen",
-              "main"
+              "womens-bottoms",
+              "womens-dresses",
+              "womens-jeans"
             ]
           }
         }
@@ -198,7 +187,7 @@
       ],
       "settings": {
         "title": "NEW ARRIVALS",
-        "guide_image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+        "guide_image": "shopify:\/\/shop_images\/collection-01_1_1.png",
         "guide_title": "OUR FITS",
         "guide_subtitle": "THE JEANS GUIDE"
       }
@@ -210,25 +199,27 @@
           "type": "accessory_category",
           "settings": {
             "category_name": "Tie & More",
-            "category_image": "shopify:\/\/shop_images\/banner1_1.png",
-            "men_link": "shopify:\/\/blogs\/news",
-            "women_link": "shopify:\/\/blogs\/news"
+            "category_image": "shopify:\/\/shop_images\/Rectangle_208_1.png",
+            "men_link": "shopify:\/\/collections\/ties",
+            "women_link": "shopify:\/\/collections\/ties"
           }
         },
         "accessory_category_idPTYU": {
           "type": "accessory_category",
           "settings": {
-            "category_name": "Category",
-            "men_link": "",
-            "women_link": ""
+            "category_name": "Belts",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_208_2.png",
+            "men_link": "shopify:\/\/collections\/belts",
+            "women_link": "shopify:\/\/collections\/belts"
           }
         },
         "accessory_category_PpeP7C": {
           "type": "accessory_category",
           "settings": {
-            "category_name": "Category",
-            "men_link": "",
-            "women_link": ""
+            "category_name": "Wallets",
+            "category_image": "shopify:\/\/shop_images\/Rectangle_208_3.png",
+            "men_link": "shopify:\/\/collections\/wallets",
+            "women_link": "shopify:\/\/collections\/wallets"
           }
         }
       },
@@ -247,49 +238,49 @@
         "custom_4P4AHn": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/self-serve-coffee-shop.jpg",
+            "image": "shopify:\/\/shop_images\/Rectangle_210ww.png",
             "link": ""
           }
         },
         "custom_KKr4nD": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg",
-            "link": ""
-          }
-        },
-        "custom_Q7eg6X": {
-          "type": "custom",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/person-enjoys-lunch-alone-in-a-sunlit-restaurant.jpg",
+            "image": "shopify:\/\/shop_images\/Rectangle_211ww.png",
             "link": ""
           }
         },
         "custom_8KLqF4": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/mountain-magic-hour.jpg",
+            "image": "shopify:\/\/shop_images\/Rectangle_212ww.png",
             "link": ""
           }
         },
-        "custom_azRcn7": {
+        "custom_Q7eg6X": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/banner1_1.png",
+            "image": "shopify:\/\/shop_images\/Rectangle_213ww.png",
             "link": ""
           }
         },
         "custom_jD9QDr": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/snowboard_sky.png",
+            "image": "shopify:\/\/shop_images\/Rectangle_210ww-2.png",
+            "link": ""
+          }
+        },
+        "custom_azRcn7": {
+          "type": "custom",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_210ww-1.png",
             "link": ""
           }
         },
         "custom_dWgjVd": {
           "type": "custom",
           "settings": {
-            "image": "shopify:\/\/shop_images\/theme_cover_image.jpg",
+            "image": "shopify:\/\/shop_images\/Rectangle_211ww-1.png",
             "link": ""
           }
         }
@@ -297,10 +288,10 @@
       "block_order": [
         "custom_4P4AHn",
         "custom_KKr4nD",
-        "custom_Q7eg6X",
         "custom_8KLqF4",
-        "custom_azRcn7",
+        "custom_Q7eg6X",
         "custom_jD9QDr",
+        "custom_azRcn7",
         "custom_dWgjVd"
       ],
       "settings": {

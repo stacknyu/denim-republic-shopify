@@ -1,6 +1,6 @@
-<div class='twcss-text-center twcss-space-y-12 twcss-px-10 twcss-bg-[#f3f3f3] twcss-py-16 md:twcss-py-28 twcss-mb-8'>
+<div class='twcss-text-center twcss-space-y-12 twcss-px-10 twcss-bg-[#f3f3f3] twcss-py-16 md:twcss-py-28 twcss-mb-8  twcss-text-black'>
   <h2 class='twcss-text-4xl md:twcss-text-6xl twcss-font-bold twcss-mb-4'>{{ section.settings.newsletter_heading }}</h2>
-  <div class='twcss-text-gray-600 md:twcss-text-3xl twcss-mb-4'>{{ section.settings.newsletter_subtext }}</div>
+  <div class='md:twcss-text-3xl twcss-mb-4'>{{ section.settings.newsletter_subtext }}</div>
   {%- form 'customer', id: 'ContactFooter', class: 'twcss-flex twcss-justify-center' -%}
     <input type='hidden' name='contact[tags]' value='newsletter'>
     <div class='twcss-flex twcss-flex-wrap twcss-justify-center twcss-w-full twcss-max-w-3xl twcss-gap-2 '>
@@ -8,7 +8,7 @@
         type='email'
         name='contact[email]'
         id='NewsletterForm--{{ section.id }}'
-        class='twcss-flex-grow twcss-px-4 twcss-py-2 twcss-border twcss-border-gray-900 twcss-bg-transparent  focus:twcss-outline-none focus:twcss-ring-2 focus:twcss-ring-blue-500'
+        class='twcss-flex-grow twcss-px-4 twcss-py-2 twcss-border-2 twcss-border-gray-900 twcss-bg-transparent  focus:twcss-outline-none focus:twcss-ring-2 focus:twcss-ring-blue-500'
         placeholder='{{ 'newsletter.label' | t }}'
         required
       >

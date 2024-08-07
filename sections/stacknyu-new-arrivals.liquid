@@ -38,6 +38,11 @@
           "default": "Size Guide"
         },
         {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Size Guide Image"
@@ -112,47 +117,56 @@
         | image_tag: class: 'twcss-w-full twcss-h-full twcss-object-cover', loading: 'lazy', alt: 'Guide'
       }}
 
-      <div class='twcss-absolute twcss-text-center twcss-gap-2 xl:twcss-gap-8  twcss-py-2 twcss-inset-0 twcss-bg-black twcss-bg-opacity-50 twcss-flex twcss-flex-col twcss-justify-center twcss-items-center twcss-text-white twcss-p-6'>
+      <div class='twcss-absolute twcss-text-center twcss-gap-2 xl:twcss-gap-10  twcss-py-2 twcss-inset-0 twcss-bg-black twcss-bg-opacity-50 twcss-flex twcss-flex-col twcss-justify-center twcss-items-center twcss-text-white twcss-p-6'>
         <h3 class=' twcss-text-3xl twcss-tracking-widest  md:twcss-text-5xl  md:twcss-tracking-[0.3em]   xl:twcss-text-6xl xl:twcss-tracking-[0.5em] twcss-text-white twcss-text-center '>
           {{ section.settings.guide_title }}
         </h3>
-        <p class='twcss-text-5xl md:twcss-text-9xl xl:twcss-text-[10.5rem] xl:twcss-leading-[9rem]   twcss-font-bold '>
+        <p class='twcss-text-5xl md:twcss-text-9xl xl:twcss-text-[11rem] xl:twcss-leading-[10rem]   twcss-font-black '>
           {{ section.settings.guide_subtitle }}
         </p>
         <div class='twcss-flex twcss-flex-wrap twcss-justify-center twcss-gap-4'>
           {% for block in section.blocks %}
             {% if block.type == 'size_guide' %}
-              <div x-cloak x-data='{showSizeGuide: false}'>
-                <div
-                  x-show='showSizeGuide'
-                  x-cloak
-                  class='twcss-fixed twcss-inset-0 twcss-bg-black twcss-px-10 md:twcss-px-0 twcss-bg-opacity-50 twcss-flex twcss-items-center twcss-justify-center twcss-z-50'
-                >
-                  <div class='twcss-bg-white twcss-p-6 twcss-rounded-lg twcss-max-w-3xl twcss-w-full'>
-                    <button
-                      @click='showSizeGuide = false'
-                      class='twcss-float-right twcss-text-black twcss-text-3xl'
-                    >
-                      &times;
-                    </button>
-                    <h3 class='twcss-text-2xl twcss-font-bold twcss-mb-4'>{{ block.settings.name }}</h3>
+              <a
+                href='{{ block.settings.url }}'
+                class=' twcss-bg-black twcss-text-3xl twcss-font-medium        twcss-border-black twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 hover:twcss-text-white twcss-transition-all twcss-duration-300  '
+              >
+                {{ block.settings.name }}
+              </a>
 
-                    {{
-                      block.settings.image
-                      | image_url: width: 1000
-                      | image_tag: class: 'twcss-w-full ', loading: 'lazy', alt: 'Size Guide'
-                    }}
+              {% comment %}
+                <div x-cloak x-data='{showSizeGuide: false}'>
+                  <div
+                    x-show='showSizeGuide'
+                    x-cloak
+                    class='twcss-fixed twcss-inset-0 twcss-bg-black twcss-px-10 md:twcss-px-0 twcss-bg-opacity-50 twcss-flex twcss-items-center twcss-justify-center twcss-z-50'
+                  >
+                    <div class='twcss-bg-white twcss-p-6 twcss-rounded-lg twcss-max-w-3xl twcss-w-full'>
+                      <button
+                        @click='showSizeGuide = false'
+                        class='twcss-float-right twcss-text-black twcss-text-3xl'
+                      >
+                        &times;
+                      </button>
+                      <h3 class='twcss-text-2xl twcss-font-bold twcss-mb-4'>{{ block.settings.name }}</h3>
+
+                      {{
+                        block.settings.image
+                        | image_url: width: 1000
+                        | image_tag: class: 'twcss-w-full ', loading: 'lazy', alt: 'Size Guide'
+                      }}
+                    </div>
                   </div>
-                </div>
 
-                <!-- Size Guide Button -->
-                <button
-                  @click='showSizeGuide = true'
-                  class=' twcss-bg-black twcss-text-3xl twcss-font-semibold        twcss-border-black twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 hover:twcss-text-white twcss-transition-all twcss-duration-300  '
-                >
-                  {{ block.settings.name }}
-                </button>
-              </div>
+                  <!-- Size Guide Button -->
+                  <button
+                    @click='showSizeGuide = true'
+                    class=' twcss-bg-black twcss-text-3xl twcss-font-semibold        twcss-border-black twcss-px-8 twcss-py-4 hover:twcss-bg-red-600 hover:twcss-text-white twcss-transition-all twcss-duration-300  '
+                  >
+                    {{ block.settings.name }}
+                  </button>
+                </div>
+              {% endcomment %}
             {% endif %}
           {% endfor %}
         </div>

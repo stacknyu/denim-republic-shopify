@@ -273,9 +273,12 @@
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'announcement' %}
-          <span class='twcss-mx-8 twcss-whitespace-nowrap'>
+          <span class='twcss-mx-8  twcss-whitespace-nowrap'>
             {% if block.settings.link != blank %}
-              <a href='{{ block.settings.link }}' class='hover:twcss-underline twcss-font-bold'>
+              <a
+                href='{{ block.settings.link }}'
+                class='hover:twcss-underline twcss-font-bold twcss-align-baseline '
+              >
                 {{ block.settings.text }}
               </a>
             {% else %}

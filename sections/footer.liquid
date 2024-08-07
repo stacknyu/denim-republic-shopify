@@ -569,7 +569,7 @@
 
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
-<footer class=' twcss-text-center twcss-py-8 twcss-w-full twcss-footer  '>
+<footer class=' twcss-text-center twcss-pb-8 twcss-pt-12 twcss-w-full twcss-footer   twcss-text-black  '>
   <div class=' twcss-w-auto twcss-mx-auto '>
     <div class='twcss-grid twcss-grid-cols-1 md:twcss-grid-cols-4 twcss-px-16 twcss-gap-8 md:twcss-gap-14'>
       {%- for block in section.blocks -%}
@@ -583,7 +583,7 @@
                 <ul class='twcss-space-y-2'>
                   {%- for link in block.settings.menu.links -%}
                     <li>
-                      <a href='{{ link.url }}' class=' twcss-text-[15px] hover:twcss-text-gray-900'>
+                      <a href='{{ link.url }}' class=' md:twcss-text-3xl hover:twcss-text-gray-900'>
                         {{ link.title }}
                       </a>
                     </li>
@@ -596,6 +596,16 @@
               <h3 class='twcss-text-2xl md:twcss-text-3xl twcss-font-semibold twcss-uppercase twcss-tracking-widest twcss-text-red-600 twcss-mb-4'>
                 {{ block.settings.heading }}
               </h3>
+              <div>
+                <p>
+                  <span class='twcss-font-medium'> T: </span>
+                  <a href='tel:{{block.settings.phone  }}'> {{ block.settings.phone }}</a>
+                </p>
+                <p>
+                  <span class='twcss-font-medium'> E: </span>
+                  <a href='mailto:{{ block.settings.email }}'> {{ block.settings.email }}</a>
+                </p>
+              </div>
               <div>{{ block.settings.subtext }}</div>
 
               <div class='twcss-flex twcss-items-center twcss-justify-center twcss-gap-1'>
@@ -665,6 +675,18 @@
           "id": "heading",
           "default": "Heading",
           "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "default": "+1 123 456 7890",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "default": "example@stacknyu.com",
+          "label": "Email"
         },
         {
           "type": "richtext",

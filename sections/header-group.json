@@ -38,7 +38,7 @@
     "stacknyu-header": {
       "type": "stacknyu-header",
       "settings": {
-        "menu": "main-sup"
+        "menu": "main-menu"
       }
     }
   },
