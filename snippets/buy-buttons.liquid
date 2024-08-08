@@ -79,12 +79,12 @@
             endif
           -%}
 
-          <div class='twcss-flex twcss-gap-3  twcss-h-full twcss-items-stretch  '>
+          <div class='twcss-flex twcss-gap-3 product-form__submit  twcss-items-stretch  '>
             <button
               id='ProductSubmitButton-{{ section_id }}'
               type='submit'
               name='add'
-              class='product-form__submit  twcss-text-2xl button button--full-width  {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}'
+              class='  twcss-text-2xl button button--full-width  {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}'
               {% if product.selected_or_first_available_variant.available == false
                 or quantity_rule_soldout
                 or product.selected_or_first_available_variant == null
@@ -98,7 +98,13 @@
                 {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                   {{ 'products.product.sold_out' | t }}
                 {%- else -%}
-                  {{ 'products.product.add_to_cart' | t }}
+                  <div
+                    class='twcss-gap-4 twcss-text-2xl twcss-font-medium twcss-px-5 twcss-flex twcss-items-center twcss-justify-center'
+                  >
+                    {% render 'stacknyu-icon-shopping-bag-white' %}
+                    <span> add to bag </span>
+                  </div>
+                  {% comment %} {{ 'products.product.add_to_cart' | t }} {% endcomment %}
                 {%- endif -%}
               </span>
               {%- render 'loading-spinner' -%}
@@ -107,7 +113,7 @@
             {% if settings['enable-wishlist'] %}
               <button
                 onclick='toggleWishlist()'
-                class='wishlist_button   twcss-aspect-square twcss-h-full    twcss-flex twcss-items-center twcss-border twcss-border-black '
+                class='wishlist_button  twcss-aspect-square  twcss-p-2  twcss-flex twcss-items-center twcss-border twcss-border-black '
               >
                 <svg width='30px' height='30px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
                   <rect x="0" fill="none" width="24" height="24"/>
@@ -121,6 +127,7 @@
               </button>
             {% endif %}
           </div>
+
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
