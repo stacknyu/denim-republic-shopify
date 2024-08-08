@@ -1,0 +1,126 @@
+{% assign current_collection = product.collections | first %}
+
+{% if section.settings.show_category_section %}
+  <div class='twcss-mt-{{ section.settings.top_margin }} twcss-mb-{{ section.settings.bottom_margin }}'>
+    <h2 class='twcss-text-{{ section.settings.heading_size }} twcss-font-bold twcss-mb-4'>
+      {{ section.settings.heading_text }}
+    </h2>
+
+    <div class='twcss-flex twcss-flex-wrap twcss-gap-2'>
+      {% assign category_count = 0 %}
+      {% assign related_collections = collections | where: 'id', current_collection.id %}
+
+      {% for collection in collections %}
+        {% if collection.all_products_count > 0 and collection.id != current_collection.id %}
+          {% if collection.products.first.type == product.type or collection.title contains current_collection.title %}
+            {% if category_count < section.settings.max_categories %}
+              <a
+                href='{{ collection.url }}'
+                class='twcss-bg-{{ section.settings.button_bg_color }} twcss-text-{{ section.settings.button_text_color }} twcss-px-3 twcss-py-1 twcss-text-sm twcss-rounded hover:twcss-bg-{{ section.settings.button_hover_color }} twcss-transition-colors'
+              >
+                {{ collection.title | capitalize }}
+              </a>
+              {% assign category_count = category_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Categories",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_category_section",
+      "label": "Show Category Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "VIEW MORE CATEGORIES"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "xl", "label": "Small" },
+        { "value": "2xl", "label": "Medium" },
+        { "value": "3xl", "label": "Large" }
+      ],
+      "default": "2xl"
+    },
+    {
+      "type": "range",
+      "id": "max_categories",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "label": "Maximum Categories to Show",
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "options": [
+        { "value": "black", "label": "Black" },
+        { "value": "gray-800", "label": "Dark Gray" },
+        { "value": "blue-600", "label": "Blue" }
+      ],
+      "default": "black"
+    },
+    {
+      "type": "select",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "gray-200", "label": "Light Gray" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "button_hover_color",
+      "label": "Button Hover Color",
+      "options": [
+        { "value": "gray-800", "label": "Dark Gray" },
+        { "value": "gray-700", "label": "Medium Gray" },
+        { "value": "blue-700", "label": "Dark Blue" }
+      ],
+      "default": "gray-800"
+    },
+    {
+      "type": "range",
+      "id": "top_margin",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "label": "Top Margin",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "bottom_margin",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "label": "Bottom Margin",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Categories",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

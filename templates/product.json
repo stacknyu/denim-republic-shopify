@@ -221,12 +221,20 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "stacknyu_newsletter_aK7Jcx": {
+      "type": "stacknyu-newsletter",
+      "settings": {
+        "newsletter_heading": "Join us and receive a voucher code",
+        "newsletter_subtext": "<p>15% off on your first purchase (SALE items excluded) and always free shipping for all new Denim Republic newsletter subscribers<\/p>"
+      }
     }
   },
   "order": [
     "main",
     "image-with-text",
     "multicolumn",
-    "related-products"
+    "related-products",
+    "stacknyu_newsletter_aK7Jcx"
   ]
 }
