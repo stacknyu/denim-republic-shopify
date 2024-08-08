@@ -350,6 +350,116 @@
     {% sections 'header-group' %}
 
     <main id='MainContent' class='content-for-layout focus-none' role='main' tabindex='-1'>
+      {%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+        {%- assign t = template | split: '.' | first -%}
+
+        <nav class='twcss-mb-8 twcss-py-7 twcss-px-10 twcss-bg-[#f3f3f3]' role='navigation' aria-label='breadcrumbs'>
+          <ol class='twcss-flex twcss-flex-wrap twcss-items-center  twcss-text-3xl twcss-space-x-3 '>
+            <li>
+              <a href='/' class='twcss-text-gray-500 hover:twcss-text-gray-700 hover:twcss-underline'>Home</a>
+            </li>
+            {%- case t -%}
+              {%- when 'page' -%}
+                <li class='twcss-text-gray-300'>/</li>
+                <li>
+                  <a href='{{ page.url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                    {{- page.title -}}
+                  </a>
+                </li>
+              {%- when 'product' -%}
+                {%- if product.collections.size > 0 -%}
+                  {%- assign main_collection = product.collections.first -%}
+                  <li class='twcss-text-gray-300'>/</li>
+                  <li>
+                    <a
+                      href='{{ main_collection.url }}'
+                      class='twcss-text-gray-500 hover:twcss-text-gray-700 hover:twcss-underline'
+                    >
+                      {{- main_collection.title -}}
+                    </a>
+                  </li>
+                {%- endif -%}
+                <li class='twcss-text-gray-300'>/</li>
+                <li>
+                  <a href='{{ product.url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                    {{- product.title -}}
+                  </a>
+                </li>
+              {%- when 'collection' and collection.handle -%}
+                <li class='twcss-text-gray-300'>/</li>
+                {%- if current_tags -%}
+                  <li>
+                    <a
+                      href='{{ collection.url }}'
+                      class='twcss-text-gray-500 hover:twcss-text-gray-700 hover:twcss-underline'
+                    >
+                      {{- collection.title -}}
+                    </a>
+                  </li>
+                  <li class='twcss-text-gray-300'>/</li>
+                  <li>
+                    {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+                    <a href='{{ tag_url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                      {{- current_tags | join: ' + ' -}}
+                    </a>
+                  </li>
+                {%- else -%}
+                  <li>
+                    <a href='{{ collection.url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                      {{- collection.title -}}
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- when 'blog' -%}
+                <li class='twcss-text-gray-300'>/</li>
+                {%- if current_tags -%}
+                  <li>
+                    <a
+                      href='{{ blog.url }}'
+                      class='twcss-text-gray-500 hover:twcss-text-gray-700 hover:twcss-underline'
+                    >
+                      {{- blog.title -}}
+                    </a>
+                  </li>
+                  <li class='twcss-text-gray-300'>/</li>
+                  <li>
+                    {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                    <a href='{{ tag_url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                      {{- current_tags | join: ' + ' -}}
+                    </a>
+                  </li>
+                {%- else -%}
+                  <li>
+                    <a href='{{ blog.url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                      {{- blog.title -}}
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- when 'article' -%}
+                <li class='twcss-text-gray-300'>/</li>
+                <li>
+                  <a href='{{ blog.url }}' class='twcss-text-gray-500 hover:twcss-text-gray-700 hover:twcss-underline'>
+                    {{- blog.title -}}
+                  </a>
+                </li>
+                <li class='twcss-text-gray-300'>/</li>
+                <li>
+                  <a href='{{ article.url }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                    {{- article.title -}}
+                  </a>
+                </li>
+              {%- else -%}
+                <li class='twcss-text-gray-300'>/</li>
+                <li>
+                  <a href='{{ request.path }}' class='twcss-font-medium twcss-text-gray-700' aria-current='page'>
+                    {{- page_title -}}
+                  </a>
+                </li>
+            {%- endcase -%}
+          </ol>
+        </nav>
+      {%- endunless -%}
+
       {{ content_for_layout }}
     </main>
 

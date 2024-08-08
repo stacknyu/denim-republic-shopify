@@ -8,29 +8,31 @@
         "footer-0": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "INFORMATION",
+            "menu": "about-dr"
           }
         },
         "footer-2": {
           "type": "text",
           "settings": {
             "heading": "Our mission",
-            "subtext": "<p><strong>Denim Republic<\/strong><\/p><p>Shop 103, Westfield Plenty Valley\u2028415 McDonalds Rd, Mill Park\u2028VIC 3082 Australia<\/p>"
+            "phone": "+1 123 456 7890",
+            "email": "example@stacknyu.com",
+            "subtext": "<p><strong>&nbsp<\/strong><\/p><p><strong>Denim Republic<\/strong><\/p><p>Shop 103, Westfield Plenty Valley\u2028415 McDonalds Rd, Mill Park\u2028VIC 3082 Australia<\/p>"
           }
         },
         "footer-1": {
           "type": "link_list",
           "settings": {
-            "heading": "Info",
-            "menu": "footer"
+            "heading": "My ACCOUNT",
+            "menu": "my-account"
           }
         },
         "link_list_nHVL6U": {
           "type": "link_list",
           "settings": {
             "heading": "Quick links",
-            "menu": "footer"
+            "menu": "main-menu"
           }
         }
       },

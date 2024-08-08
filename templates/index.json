@@ -33,26 +33,13 @@
         "category_TkwCQF": {
           "type": "category",
           "settings": {
-            "category_name": "All",
-            "collections": [
-              "accessories",
-              "adults",
-              "belts",
-              "body",
-              "christmas-sale"
-            ]
-          }
-        },
-        "category_ePApJT": {
-          "type": "category",
-          "settings": {
             "category_name": "Men",
             "collections": [
-              "mens-blazer",
-              "mens-bottoms",
-              "mens-cargo-pants",
-              "mens-chinos",
-              "mens-hoodies"
+              "kingz",
+              "mens-jeans",
+              "mens-t-shirts",
+              "shoes",
+              "mens-shorts"
             ]
           }
         },
@@ -68,12 +55,25 @@
               "womens"
             ]
           }
+        },
+        "category_ePApJT": {
+          "type": "category",
+          "settings": {
+            "category_name": "Kids",
+            "collections": [
+              "kids-balzers",
+              "kids-bottoms",
+              "kids-chinos",
+              "kids-hoodies",
+              "kids-jackets"
+            ]
+          }
         }
       },
       "block_order": [
         "category_TkwCQF",
-        "category_ePApJT",
-        "category_iWg6QD"
+        "category_iWg6QD",
+        "category_ePApJT"
       ],
       "settings": {
         "heading": "SHOP BY CATEGORIES"
@@ -87,7 +87,7 @@
           "settings": {
             "category_name": "SHOP MEN",
             "category_image": "shopify:\/\/shop_images\/Rectangle_217_b3b73fe5-8222-48cd-b8e1-f57e83466e02.png",
-            "category_link": "shopify:\/\/pages\/contact"
+            "category_link": "shopify:\/\/collections\/all"
           }
         },
         "category_E33qrH": {
@@ -147,9 +147,9 @@
             "name": "All",
             "discover_link": "shopify:\/\/collections",
             "collections": [
-              "accessories",
-              "adults",
-              "belts"
+              "mens",
+              "womens",
+              "kids"
             ]
           }
         },
@@ -176,6 +176,18 @@
               "womens-jeans"
             ]
           }
+        },
+        "category_9dxnwF": {
+          "type": "category",
+          "settings": {
+            "name": "Kids",
+            "discover_link": "shopify:\/\/collections",
+            "collections": [
+              "kids-balzers",
+              "kids-bottoms",
+              "kids-chinos"
+            ]
+          }
         }
       },
       "block_order": [
@@ -183,7 +195,8 @@
         "size_guide_JWPciN",
         "category_LeUBWT",
         "category_AFc73U",
-        "category_TziJMc"
+        "category_TziJMc",
+        "category_9dxnwF"
       ],
       "settings": {
         "title": "NEW ARRIVALS",

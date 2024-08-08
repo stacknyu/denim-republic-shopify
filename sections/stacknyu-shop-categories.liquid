@@ -1,4 +1,4 @@
-<div x-data='shopCategories()' class='twcss-px-10 twcss-w-full md:twcss-px-16 twcss-py-8 md:twcss-py-16'>
+<div class='twcss-px-10 twcss-w-full md:twcss-px-16 twcss-py-8 md:twcss-py-16'>
   <h2 class='twcss-text-4xl md:twcss-text-5xl twcss-font-bold twcss-mb-4'>{{ section.settings.heading }}</h2>
 
   <div class='twcss-mb-8'>
@@ -6,9 +6,8 @@
     <div class='twcss-inline-flex twcss-flex-wrap twcss-text-black twcss-space-x-1.5'>
       {% for block in section.blocks %}
         <button
-          @click="setFilter('{{ block.settings.category_name | handleize }}')"
-          :class="{'active': selectedFilter === '{{ block.settings.category_name | handleize }}'}"
-          class='twcss-py-2 twcss-px-2 twcss-font-bold twcss-transition twcss-duration-300 hover:twcss-text-blue-500 filter-btn'
+          class='category-filter twcss-py-2 twcss-px-2 twcss-font-bold twcss-transition twcss-duration-300 hover:twcss-text-blue-500 filter-btn {% if forloop.first %}active{% endif %}'
+          data-category='{{ block.settings.category_name | handleize }}'
         >
           {{ block.settings.category_name | upcase }}
         </button>
@@ -17,59 +16,78 @@
   </div>
 
   <div class='twcss-grid twcss-grid-cols-2 md:twcss-grid-cols-3 twcss-w-full twcss-gap-6 md:twcss-gap-10 lg:twcss-grid-cols-5'>
-    <template x-for='collection in filteredCollections' :key='collection.id'>
-      <div class='twcss-relative twcss-overflow-hidden twcss-group category-item'>
-        <img
-          :src='collection.image'
-          :alt='collection.title'
-          class='twcss-w-full twcss-aspect-square twcss-h-68 twcss-object-cover twcss-transition twcss-duration-300 group-hover:twcss-scale-110'
+    {% for block in section.blocks %}
+      {% for collection in block.settings.collections %}
+        <div
+          class='category-item twcss-relative twcss-overflow-hidden twcss-group'
+          data-category='{{ block.settings.category_name | handleize }}'
         >
-        <a :href='collection.url' class='twcss-absolute twcss-inset-0'>
-          <div class='twcss-absolute twcss-inset-0 twcss-flex twcss-items-center twcss-justify-center twcss-bg-black twcss-bg-opacity-40 twcss-transition twcss-duration-300 group-hover:twcss-bg-opacity-50'>
-            <h3
-              class='twcss-text-white twcss-text-center twcss-text-2xl twcss-cursor-pointer twcss-font-bold twcss-uppercase group-hover:twcss-text-4xl twcss-transition-all twcss-duration-500'
-              x-text='collection.title'
-            ></h3>
-          </div>
-        </a>
-      </div>
-    </template>
+          <img
+            src='{{ collection.image | image_url: width: 300   }}'
+            alt='{{ collection.title }}'
+            class='twcss-w-full twcss-aspect-square twcss-h-68 twcss-object-cover twcss-transition twcss-duration-300 group-hover:twcss-scale-110'
+          >
+          <a href='{{ collection.url }}' class='twcss-absolute twcss-inset-0'>
+            <div class='twcss-absolute twcss-inset-0 twcss-flex twcss-items-center twcss-justify-center twcss-bg-black twcss-bg-opacity-40 twcss-transition twcss-duration-300 group-hover:twcss-bg-opacity-50'>
+              <h3 class='twcss-text-white twcss-text-center twcss-text-2xl twcss-cursor-pointer twcss-font-bold twcss-uppercase group-hover:twcss-text-4xl twcss-transition-all twcss-duration-500'>
+                {{ collection.title }}
+              </h3>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    {% endfor %}
   </div>
 </div>
-
-<script>
-  function shopCategories() {
-    return {
-      selectedFilter: '{{ section.blocks.first.settings.category_name | handleize }}',
-      collections: [
-        {% for block in section.blocks %}
-          {% for collection in block.settings.collections %}
-            {
-              id: {{ collection.id | json }},
-              title: {{ collection.title | json }},
-              url: {{ collection.url | json }},
-              image: {{ collection.image | image_url: width: 300 | json }},
-              category: {{ block.settings.category_name | handleize | json }}
-            },
-          {% endfor %}
-        {% endfor %}
-      ],
-      get filteredCollections() {
-        return this.collections.filter(collection => collection.category === this.selectedFilter);
-      },
-      setFilter(filter) {
-        this.selectedFilter = filter;
-      }
-    }
-  }
-</script>
 
 <style>
   .filter-btn.active {
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+  .category-item {
+    display: none;
+  }
+  .category-item.active {
+    display: block;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.category-filter');
+    const categoryItems = document.querySelectorAll('.category-item');
+
+    function setActiveCategory(category) {
+      categoryItems.forEach((item) => {
+        if (item.dataset.category === category) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      filterButtons.forEach((button) => {
+        if (button.dataset.category === category) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        setActiveCategory(this.dataset.category);
+      });
+    });
+
+    // Set initial active category
+    if (filterButtons.length > 0) {
+      setActiveCategory(filterButtons[0].dataset.category);
+    }
+  });
+</script>
 
 {% schema %}
 {
