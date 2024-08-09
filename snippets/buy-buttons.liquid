@@ -113,6 +113,7 @@
             {% if settings['enable-wishlist'] %}
               <button
                 onclick='toggleWishlist()'
+                data-product='{{ product | json | escape }}'
                 class='wishlist_button  twcss-aspect-square  twcss-p-2  twcss-flex twcss-items-center twcss-border twcss-border-black '
               >
                 <svg width='30px' height='30px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>

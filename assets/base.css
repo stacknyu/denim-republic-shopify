@@ -3696,3 +3696,20 @@ details-disclosure > details {
 .card__media .media img {
   object-fit: cover !important;
 }
+
+.wishlist_button {
+  position: relative;
+  z-index: 10; /* Ensures it is above the anchor tag */
+  pointer-events: auto; /* Allows it to capture click events */
+}
+
+.additional-checkout-buttons div[data-shopify-buttoncontainer='true'],
+.additional-checkout-buttons ul[data-shopify-buttoncontainer='true'] {
+  flex-direction: column !important;
+  flex-basis: 1px !important;
+}
+
+#dynamic-checkout-cart ul li {
+  flex: 1;
+  flex-basis: 0 !important;
+}
