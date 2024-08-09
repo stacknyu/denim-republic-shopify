@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
@@ -255,6 +256,48 @@
       {%- endif -%}
     </div>
   {%- endpaginate -%}
+  <div class='color-{{ section.settings.color_scheme }} gradient'>
+    {%- liquid
+      assign product_obj = collection.products | first
+    -%}
+
+    <product-recommendations
+      class='related-products twcss-px-10 twcss-mt-5 section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'
+      data-url='{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}'
+      data-section-id='{{ section.id }}'
+      data-product-id='{{ product_obj.id }}'
+    >
+      {% if recommendations.performed and recommendations.products_count > 0 %}
+        <h2 class='related-products__heading inline-richtext {{ section.settings.heading_size }}'>
+          {{ section.settings.heading }}
+        </h2>
+        <ul
+          class='grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down'
+          role='list'
+        >
+          {% assign skip_card_product_styles = false %}
+          {% for recommendation in recommendations.products %}
+            <li class='grid__item'>
+              {% render 'card-product',
+                card_product: recommendation,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                skip_styles: skip_card_product_styles
+              %}
+            </li>
+            {%- assign skip_card_product_styles = true -%}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </product-recommendations>
+    {% if section.settings.image_shape == 'arch' %}
+      {% render 'mask-arch' %}
+    {%- endif -%}
+  </div>
+
   {% if section.settings.image_shape == 'arch' %}
     {% render 'mask-arch' %}
   {%- endif -%}
@@ -493,6 +536,58 @@
       "default": false,
       "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
       "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.related-products.settings.paragraph__1.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "t:sections.related-products.settings.paragraph__1.default",
+      "label": "t:sections.related-products.settings.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.related-products.settings.products_to_show.label"
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.related-products.settings.header__2.content"
     }
   ]
 }
