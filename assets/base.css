@@ -3670,3 +3670,15 @@ details-disclosure > details {
     margin: 35px 10%;
   }
 }
+
+.card__inner {
+  height: 455px;
+}
+
+.card__media {
+  border: 1px solid #dadada;
+}
+
+.card__media .media img {
+  object-fit: cover !important;
+}
