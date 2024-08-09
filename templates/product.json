@@ -156,6 +156,7 @@
         "image-with-text-0",
         "image-with-text-1"
       ],
+      "disabled": true,
       "settings": {
         "height": "small",
         "desktop_image_width": "medium",
@@ -169,6 +170,20 @@
         "mobile_content_alignment": "left",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "stacknyu_product_dynamic_BPXrC6": {
+      "type": "stacknyu-product-dynamic",
+      "settings": {
+        "show_category_section": true,
+        "heading_text": "VIEW MORE CATEGORIES",
+        "heading_size": "2xl",
+        "max_categories": 6,
+        "button_bg_color": "black",
+        "button_text_color": "white",
+        "button_hover_color": "gray-800",
+        "top_margin": 8,
+        "bottom_margin": 12
       }
     },
     "related-products": {
@@ -200,6 +215,7 @@
   "order": [
     "main",
     "image-with-text",
+    "stacknyu_product_dynamic_BPXrC6",
     "related-products",
     "stacknyu_newsletter_aK7Jcx"
   ]
