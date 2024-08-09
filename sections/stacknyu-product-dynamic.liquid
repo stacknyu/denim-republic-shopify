@@ -1,37 +1,91 @@
 {% assign current_collection = product.collections | first %}
+{% assign current_product_type = product.type | downcase %}
 
 {% if section.settings.show_category_section %}
-  <div class='twcss-mt-{{ section.settings.top_margin }} twcss-mb-{{ section.settings.bottom_margin }}'>
-    <h2 class='twcss-text-{{ section.settings.heading_size }} twcss-font-bold twcss-mb-4'>
-      {{ section.settings.heading_text }}
-    </h2>
+  <div class='twcss-container page-width twcss-mx-auto twcss-px-4 twcss-pt-12 twcss-pb-8'>
+    <h2 class='twcss-text-4xl twcss-font-extrabold twcss-my-6'>VIEW MORE {{ current_collection.title | upcase }}</h2>
 
-    <div class='twcss-flex twcss-flex-wrap twcss-gap-2'>
-      {% assign category_count = 0 %}
-      {% assign related_collections = collections | where: 'id', current_collection.id %}
-
-      {% for collection in collections %}
-        {% if collection.all_products_count > 0 and collection.id != current_collection.id %}
-          {% if collection.products.first.type == product.type or collection.title contains current_collection.title %}
-            {% if category_count < section.settings.max_categories %}
-              <a
-                href='{{ collection.url }}'
-                class='twcss-bg-{{ section.settings.button_bg_color }} twcss-text-{{ section.settings.button_text_color }} twcss-px-3 twcss-py-1 twcss-text-sm twcss-rounded hover:twcss-bg-{{ section.settings.button_hover_color }} twcss-transition-colors'
-              >
-                {{ collection.title | capitalize }}
-              </a>
-              {% assign category_count = category_count | plus: 1 %}
-            {% endif %}
-          {% endif %}
+    <div class='twcss-flex twcss-flex-col md:twcss-flex-row twcss-gap-8'>
+      <!-- Left side: Collection Image -->
+      <div class='twcss-w-full md:twcss-w-2/3 twcss-relative'>
+        {% if current_collection.image %}
+          <img
+            src='{{ current_collection.image | img_url: '1000x' }}'
+            alt='{{ current_collection.title }}'
+            class='twcss-w-full twcss-max-h-[38rem]  twcss-object-cover'
+          >
+        {% else %}
+          <div class='twcss-w-full twcss-h-96 twcss-bg-gray-200 twcss-p-3'>&nbsp</div>
         {% endif %}
-      {% endfor %}
+        <a
+          href='{{ current_collection.url }}'
+          class='twcss-absolute twcss-bottom-6 twcss-right-6 twcss-bg-black twcss-text-white twcss-px-6 twcss-py-4 twcss-font-medium twcss-text-xl'
+        >
+          shop more {{ current_collection.title }}
+        </a>
+      </div>
+
+      <!-- Right side: Related Categories -->
+      <div class='twcss-w-full twcss-flex twcss-flex-col twcss-items-center twcss-justify-center twcss-text-center md:twcss-w-1/3'>
+        <h3 class='twcss-text-3xl  twcss-font-extrabold  twcss-mb-4'>VIEW MORE CATEGORIES</h3>
+        <div class='twcss-flex twcss-items-center twcss-justify-center twcss-flex-wrap twcss-gap-2'>
+          {% assign category_count = 0 %}
+          {% assign shown_collections = '' %}
+
+          {% comment %} First pass: Try to find related categories {% endcomment %}
+          {% for collection in collections %}
+            {% if collection.all_products_count > 0 and collection.id != current_collection.id %}
+              {% assign collection_title_lower = collection.title | downcase %}
+              {% if collection.products.first.type == product.type
+                or collection_title_lower contains current_product_type
+              %}
+                {% unless shown_collections contains collection.title %}
+                  {% if category_count < section.settings.max_categories %}
+                    <a
+                      href='{{ collection.url }}'
+                      class='twcss-bg-black twcss-text-white twcss-px-4 twcss-font-medium twcss-py-2 twcss-text-2xl'
+                    >
+                      {{ collection.title | capitalize }}
+                    </a>
+                    {% assign category_count = category_count | plus: 1 %}
+                    {% assign shown_collections = shown_collections | append: collection.title | append: ',' %}
+                  {% endif %}
+                {% endunless %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          {% comment %} Second pass: If no categories found, add random collections {% endcomment %}
+          {% if category_count == 0 %}
+            {% for collection in collections %}
+              {% if collection.all_products_count > 0 and collection.id != current_collection.id %}
+                {% unless shown_collections contains collection.title %}
+                  {% if category_count < section.settings.max_categories %}
+                    <a
+                      href='{{ collection.url }}'
+                      class='twcss-bg-black twcss-text-white twcss-px-4 twcss-font-medium twcss-py-2 twcss-text-2xl'
+                    >
+                      {{ collection.title | capitalize }}
+                    </a>
+                    {% assign category_count = category_count | plus: 1 %}
+                    {% assign shown_collections = shown_collections | append: collection.title | append: ',' %}
+                  {% endif %}
+                {% endunless %}
+              {% endif %}
+              {% if category_count >= section.settings.max_categories %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 {% endif %}
 
 {% schema %}
 {
-  "name": "Product Categories",
+  "name": "Dynamic-Prod",
   "settings": [
     {
       "type": "checkbox",
