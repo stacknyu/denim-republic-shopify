@@ -487,7 +487,7 @@
   }
 </style>
 <nav
-  class='twcss-bg-white  twcss-border-b-2  twcss-border-gray-200 twcss-flex twcss-flex-col lg:twcss-flex-row md:twcss-justify-between twcss-items-stretch  md:twcss-mx-auto twcss-px-4'
+  class='twcss-bg-white  twcss-border-b-2  twcss-border-gray-200 twcss-flex twcss-flex-col xlo:twcss-flex-row md:twcss-justify-between twcss-items-stretch  md:twcss-mx-auto twcss-px-4'
   x-data='{ mobileMenuOpen: false }'
 >
   <div class='twcss-flex max-md:twcss-gap-10 max-md:twcss-py-2 twcss-justify-between twcss-items-center  lg:twcss-w-auto'>
@@ -509,12 +509,12 @@
           alt: logo_alt,
           sizes: sizes,
           preload: true,
-          class: 'max-md:twcss-max-h-12 twcss-h-auto'
+          class: 'max-sm:twcss-h-10    max-md:twcss-max-h-12  twcss-h-auto'
       }}
     </a>
 
     <button
-      class='lg:twcss-hidden twcss-flex twcss-items-center twcss-px-3 twcss-py-2 twcss-text-black twcss-border twcss-border-gray-200 twcss-rounded'
+      class='xlo:twcss-hidden twcss-flex twcss-items-center twcss-px-3 twcss-py-2 twcss-text-black twcss-border twcss-border-gray-200 twcss-rounded'
       @click='mobileMenuOpen = !mobileMenuOpen'
     >
       <svg
@@ -530,7 +530,7 @@
   </div>
 
   <ul
-    class='twcss-hidden lg:twcss-flex  twcss-ml-3 twcss-flex-col md:twcss-flex-row twcss-justify-start twcss-items-stretch twcss-w-full '
+    class='twcss-hidden xlo:twcss-flex  twcss-ml-3 twcss-flex-col md:twcss-flex-row twcss-justify-start twcss-items-stretch twcss-w-full '
     :class="{'twcss-hidden': !mobileMenuOpen, 'twcss-flex': mobileMenuOpen}"
   >
     {% for link in linklists[section.settings.menu].links %}
@@ -642,7 +642,7 @@
     {% endfor %}
   </ul>
 
-  <div class='twcss-hidden lg:twcss-flex twcss-divide-x-2 twcss-border-l-2 twcss-items-stretch twcss-px-4'>
+  <div class='twcss-hidden xlo:twcss-flex twcss-divide-x-2 twcss-border-l-2 twcss-items-stretch twcss-px-4'>
     <form
       class='twcss-flex twcss-items-center twcss-justify-center twcss-px-4 twcss-gap-2'
       action='{{ routes.search_url }}'

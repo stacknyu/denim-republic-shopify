@@ -136,7 +136,7 @@
                 id='wishlist-{{ product.id }}'
                 class='wishlist_button twcss-aspect-square twcss-p-2 twcss-flex twcss-items-center  quick-add-hidden twcss-border twcss-border-black'
                 data-product-id='{{ product.id }}'
-                data-product-title='{{ product.title | escape }}'
+                data-product-title='{{ product_in.title | escape | replace: "'", '' | replace: '"', ''  | replace: "’", '' | replace: "‘", '' | replace: "#", ''  }}'
                 data-product-img='{{ product.featured_image | img_url: '' }}'
                 data-product-price='{{ product.price | money_without_currency }}'
                 data-product-url='{{ product.url }}'

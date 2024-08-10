@@ -150,7 +150,7 @@
             id='wishlist-{{ product_in.id }}'
             class='wishlist_button twcss-z-40  twcss-aspect-square twcss-p-3 twcss-flex twcss-items-center twcss-bg-white twcss-border twcss-rounded-full'
             data-product-id='{{ product_in.id }}'
-            data-product-title='{{ product_in.title | escape }}'
+            data-product-title='{{ product_in.title | escape | replace: "'", '' | replace: '"', ''  | replace: "’", '' | replace: "‘", '' | replace: "#", ''  }}'
             data-product-img='{{ product_in.featured_image | img_url: '' }}'
             data-product-price='{{ product_in.price | money_without_currency }}'
             data-product-url='{{ product_in.url }}'

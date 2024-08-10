@@ -157,14 +157,18 @@
                           </div>
                         {% endfor %}
                       </div>
-                      <facet-remove class='twcss-ml-auto twcss-text-right'>
-                        <a
-                          href='{{ filter.url_to_remove }}'
-                          class='facets__reset  link underlined-link'
-                        >
-                          {{ 'products.facets.reset' | t }}
-                        </a>
-                      </facet-remove>
+                      {% comment %}
+                        <facet-remove class='twcss-ml-auto twcss-text-right'>
+                          <a
+                            href='{{ filter.url_to_remove }}'
+                            class='facets__reset  link underlined-link'
+                          >
+                            {{ 'products.facets.reset' | t }}
+                          </a>
+                        </facet-remove>
+                      {% endcomment %}
+
+                      {% comment %} HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI {% endcomment %}
                       {% comment %}
                         <span class='facets__selected'>
                           {{- 'products.facets.filters_selected' | t: count: filter.active_values.size -}}
@@ -237,7 +241,7 @@
                               type='checkbox'
                               style='display: none;'
                               name='filter.p.tag'
-                              value='{{ value.title  }}'
+                              value='{{ value.title | escape | replace: "'", '' | replace: '"', ''  | replace: "’", '' | replace: "‘", '' | replace: "#", ''}}'
                               id='{{ input_id }}'
                               {% if value.active %}
                                 checked
