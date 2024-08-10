@@ -234,6 +234,37 @@ product-info {
   margin: 2.5rem 0;
 }
 
+/* CUSTOM STAKCNYU */
+/* .product__info-container .product__description {
+  display: none;
+}
+
+.product__info-container .product__description .quick-add-hidden {
+  display: block;
+} */
+
+/* CUSTOM STAKCNYU */
+
+.quick-add-modal__content-info
+  > product-info
+  > div
+  > div
+  > div
+  > section
+  > .product__description {
+  padding: 0;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.hard-hidden {
+  display: none;
+}
+
 .product__text {
   margin-bottom: 0;
 }

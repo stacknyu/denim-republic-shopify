@@ -3685,17 +3685,17 @@ details-disclosure > details {
   }
 }
 
-.card__inner {
+/* .card__inner {
   height: 455px;
-}
+ }  */
 
 .card__media {
   border: 1px solid #dadada;
 }
 
-.card__media .media img {
+/* .card__media .media img {
   object-fit: cover !important;
-}
+} */
 
 .wishlist_button {
   position: relative;
