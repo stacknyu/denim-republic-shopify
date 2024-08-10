@@ -1,0 +1,250 @@
+{% comment %}
+  Renders a product card with image, title, price with complex pricing logic, and additional details
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+
+  Usage:
+  {% render 'product-card', product: product, use_variant: false, show_badges: true %}
+{% endcomment %}
+
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign price_varies = product.price_varies
+  assign compare_at_price_varies = product.compare_at_price_varies
+  assign available = target.available | default: false
+  assign money_price = price | money
+  assign money_price_min = product.price_min | money
+  assign money_price_max = product.price_max | money
+
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_price_min = product.price_min | money_with_currency
+    assign money_price_max = product.price_max | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+
+  assign color_option = product.options_with_values | where: 'name', 'Color' | first
+-%}
+
+{% comment %}
+  {%- for value in option.values -%}
+    {%- liquid
+      assign swatch_focal_point = null
+      if value.swatch.image
+        assign image_url = value.swatch.image | image_url: width: 50
+        assign swatch_value = 'url(' | append: image_url | append: ')'
+        assign swatch_focal_point = value.swatch.image.presentation.focal_point
+      elsif value.swatch.color
+        assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+      else
+        assign swatch_value = null
+      endif
+
+      assign option_disabled = true
+      if value.available
+        assign option_disabled = false
+      endif
+    -%}
+
+
+
+
+  {%- liquid
+    assign swatch_value = null
+    if swatch.image
+      assign image_url = swatch.image | image_url: width: 50
+      assign swatch_value = 'url(' | append: image_url | append: ')'
+      assign swatch_focal_point = swatch.image.presentation.focal_point
+    elsif swatch.color
+      assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+    endif
+  -%}
+
+  <span
+    {% if swatch_value %}
+      class="swatch{% if shape == 'square' %} swatch--square{% endif %}"
+      style="--swatch--background: {{ swatch_value }};{% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}"
+    {% else %}
+      class="swatch swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}"
+    {% endif %}
+  ></span>
+
+
+
+
+    {% endfor %}
+{% endcomment %}
+
+<div class='twcss-flex twcss-flex-col twcss-w-full '>
+  <div class='twcss-flex twcss-justify-between twcss-items-start twcss-mb-2 twcss-gap-2'>
+    <h3
+      class='card__heading{% if product.featured_media or settings.card_style == 'standard' %}  twcss-text-2xl {% endif %}'
+      {% if product.featured_media or settings.card_style == 'card' %}
+        id='title-{{ section_id }}-{{ product.id }}'
+      {% endif %}
+    >
+      <a
+        href='{{ product.url }}'
+        id='CardLink-{{ section_id }}-{{ product.id }}'
+        class='full-unstyled-link'
+        aria-labelledby='CardLink-{{ section_id }}-{{ product.id }} Badge-{{ section_id }}-{{ product.id }}'
+      >
+        {{ product.title | escape }}
+      </a>
+    </h3>
+    {% comment %} <h2 class='twcss-text-2xl twcss-font-bold twcss-text-gray-800 twcss-flex-grow'>{{ product.title }}</h2> {% endcomment %}
+    <div class='twcss-text-right'>
+      <span class='twcss-text-2xl twcss-font-bold twcss-text-red-500'>{{ money_price }}</span>
+      {% comment %}
+        {% if compare_at_price > price and product.quantity_price_breaks_configured? != true %}
+          <span class='twcss-block twcss-text-sm twcss-text-gray-500 twcss-line-through'>
+            {{- compare_at_price | money -}}
+          </span>
+        {% endif %}
+      {% endcomment %}
+    </div>
+  </div>
+
+  {% comment %}
+    {% if compare_at_price > price and product.quantity_price_breaks_configured? != true %}
+      <div class='twcss-flex twcss-justify-end twcss-items-center twcss-mb-2'>
+        <span class='twcss-text-sm twcss-font-semibold twcss-text-green-500'>
+          -{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%
+        </span>
+      </div>
+    {% endif %}
+  {% endcomment %}
+
+  {% if product.quantity_price_breaks_configured? %}
+    <p class='twcss-text-sm twcss-text-gray-600 twcss-mb-2'>
+      {{ 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max }}
+    </p>
+  {% endif %}
+
+  {% if compare_at_price > price %}
+    <p class='twcss-text-2xl twcss-font-light twcss-text-gray-600 twcss-mb-4'>
+      Lowest in 30 days: {{ compare_at_price | money }} (-
+      {{- compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round -}}
+      %)
+    </p>
+  {% endif %}
+
+  {% comment %}
+    <div class='twcss-flex twcss-space-x-2 twcss-mb-4'>
+      {% for variant in product.variants limit: 7 %}
+        <div
+          class='twcss-w-6 twcss-h-6 twcss-rounded-full twcss-border twcss-border-gray-300'
+          style='background-color: {{ variant.option1 | handle }};'
+        ></div>
+      {% endfor %}
+      {% if product.variants.size > 7 %}
+        <div class='twcss-w-6 twcss-h-6 twcss-rounded-full twcss-bg-gray-200 twcss-flex twcss-items-center twcss-justify-center'>
+          <span class='twcss-text-xs twcss-font-semibold'>+{{ product.variants.size | minus: 7 }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endcomment %}
+
+  {% if color_option and color_option.values.size > 0 %}
+    <div class='twcss-flex twcss-space-x-2'>
+      {% for value in color_option.values %}
+        {%- liquid
+          assign swatch = value.swatch
+          assign swatch_value = null
+          if swatch.image
+            assign image_url = swatch.image | image_url: width: 50
+            assign swatch_value = 'url(' | append: image_url | append: ')'
+            assign swatch_focal_point = swatch.image.presentation.focal_point
+          elsif swatch.color
+            assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+          endif
+        -%}
+
+        <span
+          {% if swatch_value %}
+            class='swatch{% if shape == 'square' %} swatch--square{% endif %}'
+            style='--swatch--background: {{ swatch_value }};{% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}'
+          {% else %}
+            class='swatch swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}'
+          {% endif %}
+        ></span>
+      {% endfor %}
+    </div>
+
+    {% if color_option.values.size > 7 %}
+      <div class='twcss-w-6 twcss-h-6 twcss-rounded-full twcss-bg-gray-200 twcss-flex twcss-items-center twcss-justify-center'>
+        <span
+          class='
+            twcss-text
+
+            -xs twcss-font-semibold
+          '
+          >+{{ color_option.values.size | minus: 7 -}}
+        </span>
+      </div>
+    {% endif %}
+
+    {% comment %}
+      {%- unless product.has_only_default_variant -%}
+        <variant-selects
+          id='variant-selects-{{ section_id }}'
+          data-section='{{ section_id }}'
+          {{ block.shopify_attributes }}
+        >
+          {%- for option in product.options_with_values -%}
+            {%- liquid
+              assign swatch_count = option.values | map: 'swatch' | compact | size
+              assign picker_type = block.settings.picker_type
+
+              if swatch_count > 0 and block.settings.swatch_shape != 'none'
+                if block.settings.picker_type == 'dropdown'
+                  assign picker_type = 'swatch_dropdown'
+                else
+                  assign picker_type = 'swatch'
+                endif
+              endif
+            -%}
+            {%- if picker_type == 'swatch' -%}
+              <fieldset class='js product-form__input product-form__input--swatch twcss-my-3'>
+                <legend class='form__label twcss-font-medium  twcss-text-2xl twcss-text-black'></legend>
+
+                <label
+                  for='{{ id }}'
+                  title='{{ value }}'
+                  class='swatch-input__label{% if shape == 'square' %} swatch-input__label--square{% endif %}'
+                >
+                  {% render 'swatch', swatch: swatch, shape: shape %}
+                  {{ help_text }}
+                </label>
+
+                {% render 'product-variant-options',
+                  product: product,
+                  option: option,
+                  block: block,
+                  picker_type: picker_type
+                %}
+              </fieldset>
+            {%- endif -%}
+          {%- endfor -%}
+
+          <script type='application/json' data-selected-variant>
+            {{ product.selected_or_first_available_variant | json }}
+          </script>
+        </variant-selects>
+      {%- endunless -%}
+    {% endcomment %}
+  {% endif %}
+</div>
