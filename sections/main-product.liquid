@@ -250,6 +250,9 @@
                     </summary>
                     <div class='accordion__content rte' id='ProductAccordion-{{ block.id }}-{{ section.id }}'>
                       <div class='accordion__content-wrapper{% if block.settings.image_position == 'left' %} image-left{% endif %}'>
+                        <div class='accordion__text'>
+                          {{ block.settings.content }}
+                        </div>
                         {% if block.settings.image %}
                           <div class='accordion__image'>
                             {{
@@ -259,9 +262,6 @@
                             }}
                           </div>
                         {% endif %}
-                        <div class='accordion__text'>
-                          {{ block.settings.content }}
-                        </div>
                       </div>
                     </div>
                   </details>
