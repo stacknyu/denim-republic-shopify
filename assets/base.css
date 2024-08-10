@@ -3713,3 +3713,11 @@ details-disclosure > details {
   flex: 1;
   flex-basis: 0 !important;
 }
+
+.related-products .wishlist_button {
+  display: none;
+}
+
+.related-products .qc-view {
+  display: none;
+}
