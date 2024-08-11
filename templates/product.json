@@ -73,13 +73,14 @@
           "settings": {
             "heading": "Quick Size Guide",
             "icon": "ruler",
-            "content": "",
+            "content": "{{ product.metafields.custom.size_guide_description | metafield_tag }}",
             "image": "{{ product.metafields.custom.size_guide.value }}",
             "image_position": "right"
           }
         },
         "popup_TFx4jM": {
           "type": "popup",
+          "disabled": true,
           "settings": {
             "text": "Quick SIze Chart",
             "page": "adult-jeans-size-guide"

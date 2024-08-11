@@ -68,12 +68,25 @@
               "kids-jackets"
             ]
           }
+        },
+        "category_9QReaR": {
+          "type": "category",
+          "settings": {
+            "category_name": "Accesories",
+            "collections": [
+              "adults",
+              "belts",
+              "body",
+              "bow-ties-1"
+            ]
+          }
         }
       },
       "block_order": [
         "category_TkwCQF",
         "category_iWg6QD",
-        "category_ePApJT"
+        "category_ePApJT",
+        "category_9QReaR"
       ],
       "settings": {
         "heading": "SHOP BY CATEGORIES"
@@ -87,7 +100,7 @@
           "settings": {
             "category_name": "SHOP MEN",
             "category_image": "shopify:\/\/shop_images\/Rectangle_217_b3b73fe5-8222-48cd-b8e1-f57e83466e02.png",
-            "category_link": "shopify:\/\/collections\/all"
+            "category_link": "shopify:\/\/collections\/mens"
           }
         },
         "category_E33qrH": {
@@ -95,7 +108,7 @@
           "settings": {
             "category_name": "SHOP WOMEN",
             "category_image": "shopify:\/\/shop_images\/Rectangle_217_1.png",
-            "category_link": "shopify:\/\/products\/the-complete-snowboard"
+            "category_link": "shopify:\/\/collections\/womens"
           }
         },
         "category_BiFDiJ": {
@@ -103,7 +116,7 @@
           "settings": {
             "category_name": "SHOP KIDS",
             "category_image": "shopify:\/\/shop_images\/Rectangle_218.png",
-            "category_link": ""
+            "category_link": "shopify:\/\/collections\/kids"
           }
         },
         "category_zEzC6M": {
@@ -111,7 +124,7 @@
           "settings": {
             "category_name": "Shop Accessories",
             "category_image": "shopify:\/\/shop_images\/Rectangle_217_2.png",
-            "category_link": ""
+            "category_link": "shopify:\/\/collections\/accessories"
           }
         }
       },

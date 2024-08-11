@@ -1,5 +1,22 @@
 <div class='twcss-relative twcss-bg-black twcss-text-white'>
-  {% if section.settings.background_image != blank %}
+  {% if section.settings.background_video != blank %}
+    <video
+      class='twcss-w-full twcss-h-[400px] md:twcss-h-[650px] twcss-object-cover twcss-opacity-50'
+      autoplay
+      loop
+      muted
+      playsinline
+      poster='{{ section.settings.background_video.preview_image.src }}'
+    >
+      {% assign video_sources = section.settings.background_video.sources | sort: 'width' | reverse %}
+      {% for source in video_sources %}
+        {% if source.format == 'mp4' %}
+          <source src='{{ source.url }}' type='{{ source.mime_type }}'>
+        {% endif %}
+      {% endfor %}
+      Your browser does not support the video tag.
+    </video>
+  {% elsif section.settings.background_image != blank %}
     {{
       section.settings.background_image
       | image_url: width: 1500
@@ -23,7 +40,7 @@
     {% if section.settings.button_label != blank and section.settings.button_link != blank %}
       <a
         href='{{ section.settings.button_link }}'
-        class='twcss-mt-6 twcss-px-6 twcss-py-3 twcss-bg-[#111111] twcss-text-white  hover:twcss-bg-red-600 hover:twcss-text-white md:twcss-py-4  twcss-font-semibold twcss-hover:twcss-bg-gray-200 twcss-transition twcss-duration-300'
+        class='twcss-mt-6 twcss-px-7 twcss-py-3 twcss-bg-[#111111] twcss-text-white  hover:twcss-bg-red-600 hover:twcss-text-white md:twcss-py-4  twcss-font-semibold twcss-hover:twcss-bg-gray-200 twcss-transition twcss-duration-300'
       >
         {{ section.settings.button_label }}
       </a>
@@ -36,9 +53,14 @@
   "name": "Hero Sale",
   "settings": [
     {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video"
+    },
+    {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background Image"
+      "label": "Background Image (fallback)"
     },
     {
       "type": "text",

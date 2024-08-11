@@ -51,14 +51,16 @@
     <div class='twcss-w-full twcss-px-6  md:twcss-px-12 twcss-bg-[#f3f3f3] twcss-pb-5 twcss-mb-5  '>
       <div class='collection-hero twcss-py-4 twcss-w-full {% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}  '>
         <div class='collection-hero__inner twcss-flex  twcss-flex-col twcss-items-center twcss-justify-center twcss-text-center  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}'>
-          <div class='collection-hero__text-wrapper'>
+          <div class='collection-hero__text-wrapper twcss-flex twcss-flex-col twcss-items-center twcss-justify-center twcss-mx-auto twcss-text-center twcss-px-6'>
             <h1 class='collection-hero__title'>
               <span class='visually-hidden'>{{ 'sections.collection_template.title' | t }}: </span>
               {{- collection.title | escape -}}
             </h1>
 
             {%- if section.settings.show_collection_description -%}
-              <div class='collection-hero__description twcss-mx-auto rte'>{{ collection.description }}</div>
+              <div class='collection-hero__description  rte  '>
+                {{ collection.description }}
+              </div>
             {%- endif -%}
           </div>
 
@@ -216,6 +218,7 @@
             class='
               grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
               grid--{{ section.settings.columns_desktop }}-col-desktop
+              grid--3-col-tablet grid--2-col-cus
               {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
             '
           >

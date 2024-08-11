@@ -88,7 +88,7 @@
     {% endfor %}
 {% endcomment %}
 
-<div class='twcss-flex twcss-flex-col twcss-w-full '>
+<div class='twcss-flex twcss-flex-col twcss-w-full twcss-flex-wrap '>
   <div class='twcss-flex twcss-justify-between twcss-items-start twcss-mb-2 twcss-gap-2'>
     <h3
       class='card__heading{% if product.featured_media or settings.card_style == 'standard' %}  twcss-text-2xl {% endif %}'
@@ -176,10 +176,10 @@
 
           <span
             {% if swatch_value %}
-              class='swatch{% if shape == 'square' %} swatch--square{% endif %}'
+              class='swatch swatch--responsive{% if shape == 'square' %} swatch--square{% endif %}'
               style='--swatch--background: {{ swatch_value }};{% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}'
             {% else %}
-              class='swatch swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}'
+              class='swatch swatch--responsive swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}'
             {% endif %}
           ></span>
         {% endif %}

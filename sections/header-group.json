@@ -5,13 +5,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_UJxcAB": {
-          "type": "announcement",
-          "settings": {
-            "text": "EXCLUSIVE HOLIDAY DEALS: SHOP NOW FOR LIMITED-TIME DISCOUNTS! Shop Now",
-            "link": "shopify:\/\/products\/gift-card"
-          }
-        },
         "announcement_b7DMT9": {
           "type": "announcement",
           "settings": {
@@ -25,12 +18,19 @@
             "text": "FREE SHIPPING ON ALL ORDERS OVER $100 – SHOP NOW",
             "link": "shopify:\/\/collections\/automated-collection"
           }
+        },
+        "announcement_gdMNdr": {
+          "type": "announcement",
+          "settings": {
+            "text": "Announce something here",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement_UJxcAB",
         "announcement_b7DMT9",
-        "announcement_ypnGBy"
+        "announcement_ypnGBy",
+        "announcement_gdMNdr"
       ],
       "settings": {
       }
