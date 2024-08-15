@@ -660,5 +660,13 @@
       // Display wishlist items
       displayWishlist();
     }); {% endcomment %}
+
+    {% if template contains "product" %}
+   
+      window.addEventListener('DOMContentLoaded',(event)=>{
+      document.querySelectorAll('.deferred-media__poster-button.motion-reduce')[0].click()
+      });
+    
+      {% endif %}
   </script>
 </html>

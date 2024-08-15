@@ -46,17 +46,17 @@
             "show_gift_card_recipient": false
           }
         },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+          }
+        },
         "collap_prod_description_UAMr3d": {
           "type": "collap_prod_description",
           "settings": {
             "heading": "Product Description",
             "icon": "star"
-          }
-        },
-        "description": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
           }
         },
         "collapsible-row-0": {
@@ -111,8 +111,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "collap_prod_description_UAMr3d",
         "description",
+        "collap_prod_description_UAMr3d",
         "collapsible-row-0",
         "collap_content_image_WnFVaV",
         "popup_TFx4jM",
@@ -130,7 +130,7 @@
         "image_zoom": "lightbox",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
-        "enable_video_looping": false,
+        "enable_video_looping": true,
         "padding_top": 36,
         "padding_bottom": 12
       }
