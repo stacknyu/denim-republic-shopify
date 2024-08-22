@@ -3,6 +3,7 @@
     "stacknyu_hero_sale_BwpY6L": {
       "type": "stacknyu-hero-sale",
       "settings": {
+        "background_video": "shopify:\/\/files\/videos\/6770047-uhd_3840_2160_25fps.mp4",
         "background_image": "shopify:\/\/shop_images\/a55d0e7b413c0f7df60f57bdfe688a7d.gif",
         "heading": "UP TO 50% OFF SALE",
         "mainheading": "SALE",

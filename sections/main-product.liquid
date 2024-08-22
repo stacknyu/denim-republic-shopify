@@ -255,11 +255,28 @@
                         </div>
                         {% if block.settings.image %}
                           <div class='accordion__image'>
-                            {{
-                              block.settings.image
-                              | image_url: width: 300
-                              | image_tag: loading: 'lazy', width: 300, height: 300
-                            }}
+                            <modal-opener
+                              class='product-popup-modal__opener'
+                              data-modal='#PopupModal-{{ block.id }}'
+                              {{ block.shopify_attributes }}
+                            >
+                              <button
+                                id='ProductPopup-{{ block.id }}'
+                                class='product-popup-modal__button'
+                                type='button'
+                                aria-haspopup='dialog'
+                              >
+                                {{
+                                  block.settings.image
+                                  | image_url: width: 300
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    width: 300,
+                                    height: 300,
+                                    class: 'cursor-pointer transition-transform hover:scale-105'
+                                }}
+                              </button>
+                            </modal-opener>
                           </div>
                         {% endif %}
                       </div>
@@ -492,6 +509,23 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+              {%- when 'adjustable_image' -%}
+                <div class='product__block product__block--adjustable-image' {{ block.shopify_attributes }}>
+                  {%- if block.settings.image -%}
+                    <div style='width: {{ block.settings.image_width }}%;'>
+                      {{
+                        block.settings.image
+                        | image_url: width: 2000
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200',
+                          sizes: '(min-width: 750px) calc(100vw - 22rem), 100vw'
+                      }}
+                    </div>
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                  {%- endif -%}
+                </div>
               {%- when 'popup' -%}
                 <modal-opener
                   class='product-popup-modal__opener quick-add-hidden'
@@ -622,7 +656,6 @@
                                 <ul class='list-unstyled' role='list'>
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
-                                    offset: continue
                                   -%}
                                     <li>
                                       {%- if block.settings.enable_quick_add -%}
@@ -746,6 +779,43 @@
       </modal-dialog>
     {%- endfor -%}
 
+    {% comment %}  {% endcomment %}
+    {% assign obj = section.blocks | where: 'type', 'collap_content_image' %}
+
+    {%- for block in obj -%}
+      {% comment %}  {% endcomment %}
+      <modal-dialog id='PopupModal-{{ block.id }}' class='product-popup-modal' {{ block.shopify_attributes }}>
+        <div
+          role='dialog'
+          aria-label='Enlarged product image'
+          aria-modal='true'
+          class='product-popup-modal__conten_img '
+
+          tabindex='-1'
+        >
+          <button
+            id='ModalClose-{{ block.id }}'
+            type='button'
+            class='product-popup-modal__toggle'
+            aria-label='{{ 'accessibility.close' | t }}'
+          >
+            {% render 'icon-close' %}
+          </button>
+          <div class='twcss-w-full'>
+            {% if block.settings.image %}
+              {{
+                block.settings.image
+                | image_url: width: 1000
+                | image_tag: loading: 'lazy', class: 'twcss-w-full twcss-h-auto  object-contain'
+              }}
+            {% endif %}
+          </div>
+        </div>
+      </modal-dialog>
+    {%- endfor -%}
+
+    {% comment %}  {% endcomment %}
+
     {%- if product.media.size > 0 -%}
       <script src='{{ 'product-modal.js' | asset_url }}' defer='defer'></script>
       <script src='{{ 'media-gallery.js' | asset_url }}' defer='defer'></script>
@@ -780,6 +850,27 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "adjustable_image",
+      "name": "Adjustable Width Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 5,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Image width",
+          "default": 100
+        }
+      ]
     },
     {
       "type": "text",
